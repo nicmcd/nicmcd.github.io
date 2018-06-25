@@ -2,7 +2,7 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Projects on Nic McDonald</title>
-    <link>https://nicmcd.github.io/project/</link>
+    <link>/project/</link>
     <description>Recent content in Projects on Nic McDonald</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
@@ -12,37 +12,37 @@
     
     <item>
       <title>Supersim</title>
-      <link>https://nicmcd.github.io/project/supersim/</link>
+      <link>/project/supersim/</link>
       <pubDate>Mon, 25 Jun 2018 00:00:00 -0600</pubDate>
       
-      <guid>https://nicmcd.github.io/project/supersim/</guid>
+      <guid>/project/supersim/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Taskrun</title>
-      <link>https://nicmcd.github.io/project/taskrun/</link>
+      <link>/project/taskrun/</link>
       <pubDate>Sat, 01 Jul 2017 00:00:00 -0600</pubDate>
       
-      <guid>https://nicmcd.github.io/project/taskrun/</guid>
+      <guid>/project/taskrun/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Devsearch</title>
-      <link>https://nicmcd.github.io/project/devsearch/</link>
+      <link>/project/devsearch/</link>
       <pubDate>Thu, 01 Jun 2017 00:00:00 -0600</pubDate>
       
-      <guid>https://nicmcd.github.io/project/devsearch/</guid>
+      <guid>/project/devsearch/</guid>
       <description></description>
     </item>
     
     <item>
       <title>ParaMgmt</title>
-      <link>https://nicmcd.github.io/project/paramgmt/</link>
+      <link>/project/paramgmt/</link>
       <pubDate>Mon, 01 Jun 2015 00:00:00 -0600</pubDate>
       
-      <guid>https://nicmcd.github.io/project/paramgmt/</guid>
+      <guid>/project/paramgmt/</guid>
       <description></description>
     </item>
     

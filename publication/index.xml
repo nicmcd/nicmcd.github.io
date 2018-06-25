@@ -2,7 +2,7 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Publications on Nic McDonald</title>
-    <link>https://nicmcd.github.io/publication/</link>
+    <link>/publication/</link>
     <description>Recent content in Publications on Nic McDonald</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
@@ -12,28 +12,28 @@
     
     <item>
       <title>SuperSim: Extensible Flit-Level Simulation of Large-Scale Interconnection Networks</title>
-      <link>https://nicmcd.github.io/publication/supersim-ispass-2018/</link>
+      <link>/publication/supersim-ispass-2018/</link>
       <pubDate>Sun, 01 Apr 2018 00:00:00 -0600</pubDate>
       
-      <guid>https://nicmcd.github.io/publication/supersim-ispass-2018/</guid>
+      <guid>/publication/supersim-ispass-2018/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Arbitrating Data Packets</title>
-      <link>https://nicmcd.github.io/publication/patent-arbitrating-data-packets-2017/</link>
+      <link>/publication/patent-arbitrating-data-packets-2017/</link>
       <pubDate>Fri, 17 Mar 2017 00:00:00 -0600</pubDate>
       
-      <guid>https://nicmcd.github.io/publication/patent-arbitrating-data-packets-2017/</guid>
+      <guid>/publication/patent-arbitrating-data-packets-2017/</guid>
       <description></description>
     </item>
     
     <item>
       <title>High-Performance Service-Oriented Computing</title>
-      <link>https://nicmcd.github.io/publication/hpsoc-stanford-2016/</link>
+      <link>/publication/hpsoc-stanford-2016/</link>
       <pubDate>Wed, 01 Jun 2016 00:00:00 +0000</pubDate>
       
-      <guid>https://nicmcd.github.io/publication/hpsoc-stanford-2016/</guid>
+      <guid>/publication/hpsoc-stanford-2016/</guid>
       <description></description>
     </item>
     
