@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Authors | Nic McDonald</title>
+    <link>/authors/</link>
+      <atom:link href="/authors/index.xml" rel="self" type="application/rss+xml" />
+    <description>Authors</description>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>© 2019 Nic McDonald</copyright><lastBuildDate>Sun, 17 Nov 2019 00:00:00 +0000</lastBuildDate>
+    <image>
+      <url>/img/icon-192.png</url>
+      <title>Authors</title>
+      <link>/authors/</link>
+    </image>
+    
+    <item>
+      <title></title>
+      <link>/authors/admin/</link>
+      <pubDate>Sun, 17 Nov 2019 00:00:00 +0000</pubDate>
+      <guid>/authors/admin/</guid>
+      <description>&lt;p&gt;I am a computer architecture research scientist and software/hardware engineer. I am a senior software engineer in the &lt;a href=&#34;https://ai.google/research/teams/network-systems/&#34; target=&#34;_blank&#34;&gt;Network Infrastructure&lt;/a&gt; team at &lt;a href=&#34;https://www.google.com&#34; target=&#34;_blank&#34;&gt;Google&lt;/a&gt; working on next generation hardware and software systems for Google networks.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Adriana Flores</title>
+      <link>/authors/adriana-flores/</link>
+      <pubDate>Sun, 17 Nov 2019 00:00:00 +0000</pubDate>
+      <guid>/authors/adriana-flores/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Al Davis</title>
+      <link>/authors/al-davis/</link>
+      <pubDate>Sun, 17 Nov 2019 00:00:00 +0000</pubDate>
+      <guid>/authors/al-davis/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>John Kim</title>
+      <link>/authors/john-kim/</link>
+      <pubDate>Sun, 17 Nov 2019 00:00:00 +0000</pubDate>
+      <guid>/authors/john-kim/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Mikhail Isaev</title>
+      <link>/authors/mikhail-isaev/</link>
+      <pubDate>Sun, 17 Nov 2019 00:00:00 +0000</pubDate>
+      <guid>/authors/mikhail-isaev/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Doug Gibson</title>
+      <link>/authors/doug-gibson/</link>
+      <pubDate>Mon, 02 Apr 2018 00:00:00 +0000</pubDate>
+      <guid>/authors/doug-gibson/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Bill Dally</title>
+      <link>/authors/bill-dally/</link>
+      <pubDate>Wed, 01 Jun 2016 00:00:00 +0000</pubDate>
+      <guid>/authors/bill-dally/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>

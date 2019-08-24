@@ -1,48 +1,54 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Projects on Nic McDonald</title>
+    <title>Projects | Nic McDonald</title>
     <link>/project/</link>
-    <description>Recent content in Projects on Nic McDonald</description>
-    <generator>Hugo -- gohugo.io</generator>
-    <language>en-us</language>
-    <copyright>&amp;copy; 2018</copyright>
-    <lastBuildDate>Mon, 25 Jun 2018 00:00:00 -0600</lastBuildDate>
-    <atom:link href="/project/" rel="self" type="application/rss+xml" />
+      <atom:link href="/project/index.xml" rel="self" type="application/rss+xml" />
+    <description>Projects</description>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>© 2019 Nic McDonald</copyright><lastBuildDate>Sun, 01 Nov 2015 00:00:00 +0000</lastBuildDate>
+    <image>
+      <url>/img/icon-192.png</url>
+      <title>Projects</title>
+      <link>/project/</link>
+    </image>
     
     <item>
-      <title>Supersim</title>
-      <link>/project/supersim/</link>
-      <pubDate>Mon, 25 Jun 2018 00:00:00 -0600</pubDate>
-      
-      <guid>/project/supersim/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Taskrun</title>
-      <link>/project/taskrun/</link>
-      <pubDate>Sat, 01 Jul 2017 00:00:00 -0600</pubDate>
-      
-      <guid>/project/taskrun/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Devsearch</title>
-      <link>/project/devsearch/</link>
-      <pubDate>Thu, 01 Jun 2017 00:00:00 -0600</pubDate>
-      
-      <guid>/project/devsearch/</guid>
+      <title>libdes</title>
+      <link>/project/libdes/</link>
+      <pubDate>Sun, 01 Nov 2015 00:00:00 +0000</pubDate>
+      <guid>/project/libdes/</guid>
       <description></description>
     </item>
     
     <item>
       <title>ParaMgmt</title>
       <link>/project/paramgmt/</link>
-      <pubDate>Mon, 01 Jun 2015 00:00:00 -0600</pubDate>
-      
+      <pubDate>Wed, 06 Aug 2014 00:00:00 +0000</pubDate>
       <guid>/project/paramgmt/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>TaskRun</title>
+      <link>/project/taskrun/</link>
+      <pubDate>Mon, 09 Dec 2013 00:00:00 +0000</pubDate>
+      <guid>/project/taskrun/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>SuperSim</title>
+      <link>/project/supersim/</link>
+      <pubDate>Wed, 01 May 2013 00:00:00 +0000</pubDate>
+      <guid>/project/supersim/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>DevSearch</title>
+      <link>/project/devsearch/</link>
+      <pubDate>Wed, 22 Aug 2012 00:00:00 +0000</pubDate>
+      <guid>/project/devsearch/</guid>
       <description></description>
     </item>
     

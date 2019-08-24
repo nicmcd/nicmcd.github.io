@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Development | Nic McDonald</title>
+    <link>/tags/development/</link>
+      <atom:link href="/tags/development/index.xml" rel="self" type="application/rss+xml" />
+    <description>Development</description>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>© 2019 Nic McDonald</copyright><lastBuildDate>Wed, 06 Aug 2014 00:00:00 +0000</lastBuildDate>
+    <image>
+      <url>/img/icon-192.png</url>
+      <title>Development</title>
+      <link>/tags/development/</link>
+    </image>
+    
+    <item>
+      <title>ParaMgmt</title>
+      <link>/project/paramgmt/</link>
+      <pubDate>Wed, 06 Aug 2014 00:00:00 +0000</pubDate>
+      <guid>/project/paramgmt/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>DevSearch</title>
+      <link>/project/devsearch/</link>
+      <pubDate>Wed, 22 Aug 2012 00:00:00 +0000</pubDate>
+      <guid>/project/devsearch/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>
