@@ -12,6 +12,7 @@
     "validate": "astro sync && node --experimental-strip-types scripts/validate-content.ts",
     "test": "vitest run",
     "test:e2e": "playwright test",
+    "test:suite": "node --experimental-strip-types scripts/test-cached.ts",
     "screenshots": "UPDATE_SCREENSHOTS=1 playwright test e2e/screenshots.spec.ts"
   },
   "dependencies": {

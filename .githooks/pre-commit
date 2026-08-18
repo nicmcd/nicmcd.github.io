@@ -1,6 +1,9 @@
 #!/bin/sh
 # Pre-commit hook: run the full test suite before every commit.
 # Mirrors CI: content validation, type check, unit tests, build, e2e tests.
+# Uses the content-hash cache in scripts/test-cached.ts: steps whose input
+# files are unchanged since their last passing run are skipped, so running
+# `npm run test:suite` before committing makes this hook effectively instant.
 # Enabled via `git config core.hooksPath .githooks` (see AGENTS.md).
 # Bypass in an emergency with `git commit --no-verify`.
 
@@ -8,27 +11,4 @@ set -e
 
 cd "$(git rev-parse --show-toplevel)"
 
-echo "pre-commit: running full test suite..."
-
-echo ""
-echo "==> npm run validate"
-npm run validate
-
-echo ""
-echo "==> npm run check"
-npm run check
-
-echo ""
-echo "==> npm test"
-npm test
-
-echo ""
-echo "==> npm run build"
-npm run build
-
-echo ""
-echo "==> npm run test:e2e"
-npm run test:e2e
-
-echo ""
-echo "pre-commit: all tests passed."
+node --experimental-strip-types scripts/test-cached.ts

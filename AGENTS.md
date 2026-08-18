@@ -16,6 +16,7 @@ from this repository via GitHub Actions.
 | `npm run validate`   | Content validation (cross-references, slugs, assets, dates).   |
 | `npm test`           | Vitest unit tests.                                             |
 | `npm run test:e2e`   | Playwright e2e suite against a production build.               |
+| `npm run test:suite` | Full suite (validate, check, test, build, e2e) with caching.   |
 | `npm run screenshots`| Regenerate the local reference screenshots (git-ignored).      |
 
 Note: in Astro 7, `astro preview` starts a background daemon and exits. Use
@@ -167,6 +168,11 @@ canonical steps are:
 
 - Keep `npm run validate`, `npm run check`, `npm test`, `npm run build`, and
   `npm run test:e2e` green. CI runs all of them on pull requests.
+- Prefer `npm run test:suite` when running the whole suite: it fingerprints
+  each step's input files and skips steps that already passed on unchanged
+  content (stamps in the git-ignored `.test-cache/`; delete it to force a
+  full run). The pre-commit hook uses the same cache, so a suite run right
+  before committing makes the hook effectively instant.
 - E2e suite covers navigation, homepage sections, every project filter,
   search, theme behavior, publication details and citation dialogs, all
   canonical/redirect/feed routes, accessibility (axe: no serious or critical
@@ -180,10 +186,11 @@ canonical steps are:
 
 - A versioned pre-commit hook lives in `.githooks/pre-commit` and runs the
   full test suite (`validate`, `check`, `test`, `build`, `test:e2e`) before
-  every commit, mirroring CI. The repo is configured with
-  `core.hooksPath=.githooks`; fresh clones must run
-  `git config core.hooksPath .githooks` once to enable it. Bypass in an
-  emergency with `git commit --no-verify`.
+  every commit, mirroring CI. It runs through `scripts/test-cached.ts`, which
+  skips steps whose inputs are unchanged since their last pass (see Testing
+  expectations). The repo is configured with `core.hooksPath=.githooks`;
+  fresh clones must run `git config core.hooksPath .githooks` once to enable
+  it. Bypass in an emergency with `git commit --no-verify`.
 
 ## Deployment
 
