@@ -164,6 +164,15 @@ Use the tokens; do not introduce hard-coded values in components.
   `UPDATE_SCREENSHOTS=1`); regular e2e runs skip capture so they never
   rewrite the PNGs. Regenerate them when the design intentionally changes.
 
+## Git hooks
+
+- A versioned pre-commit hook lives in `.githooks/pre-commit` and runs the
+  full test suite (`validate`, `check`, `test`, `build`, `test:e2e`) before
+  every commit, mirroring CI. The repo is configured with
+  `core.hooksPath=.githooks`; fresh clones must run
+  `git config core.hooksPath .githooks` once to enable it. Bypass in an
+  emergency with `git commit --no-verify`.
+
 ## Deployment
 
 - `.github/workflows/ci.yml` runs validation, type check, unit tests, build,
