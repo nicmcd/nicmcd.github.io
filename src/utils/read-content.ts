@@ -71,6 +71,7 @@ export function readContentForValidation(
       imageAlt: String(p.imageAlt ?? ""),
       pdf: String(p.pdf ?? ""),
       slides: p.slides === undefined ? undefined : String(p.slides),
+      poster: p.poster === undefined ? undefined : String(p.poster),
       bibPath: String(p.bibPath ?? ""),
     })),
     experience: experience.map((e) => ({

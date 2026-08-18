@@ -88,6 +88,7 @@ const publications = defineCollection({
       projects: z.array(z.string()).default([]),
       pdf: z.string().regex(/^pubs\/.+\.pdf$/),
       slides: z.string().regex(/^pubs\/.+\.pdf$/).optional(),
+      poster: z.string().regex(/^pubs\/.+\.pdf$/).optional(),
       bibPath: z.string().regex(/^publication\/.+\/cite\.bib$/),
     }),
 });

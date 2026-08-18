@@ -11,6 +11,7 @@ function makePublicDir(): string {
   const dir = mkdtempSync(join(tmpdir(), "nicm-validate-"));
   writeFileSync(join(dir, "paper.pdf"), "pdf");
   writeFileSync(join(dir, "slides.pdf"), "pdf");
+  writeFileSync(join(dir, "poster.pdf"), "pdf");
   writeFileSync(join(dir, "cite.bib"), "bib");
   return dir;
 }
@@ -32,6 +33,7 @@ function validInput(publicDir: string): ValidationInput {
         imageAlt: "alt",
         pdf: "paper.pdf",
         slides: "slides.pdf",
+        poster: "poster.pdf",
         bibPath: "cite.bib",
       },
     ],

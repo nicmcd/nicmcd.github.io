@@ -1,14 +1,14 @@
 ---
 name: add-pub
-description: Use when the user wants to add a new publication (conference paper, thesis, etc.) to this website. Guides an interactive workflow to collect the paper details, PDF, BibTeX citation, featured image, and optional slides/DOI/project links, then creates all required files and validates the build.
+description: Use when the user wants to add a new publication (conference paper, thesis, etc.) to this website. Guides an interactive workflow to collect the paper details, PDF, BibTeX citation, featured image, and optional slides/poster/DOI/project links, then creates all required files and validates the build.
 ---
 
 # Add a publication
 
 Publications are validated Astro content entries. Every publication **must**
-have a PDF and a BibTeX file; slides, DOI, and project links are optional.
-Work interactively: gather everything from the user first, then create files,
-then validate.
+have a PDF and a BibTeX file; slides, poster, DOI, and project links are
+optional. Work interactively: gather everything from the user first, then
+create files, then validate.
 
 ## Step 1 — Gather information from the user
 
@@ -50,6 +50,9 @@ before writing anything.
 - **Slides PDF**: source file path; copied to `public/pubs/` using the same
   base name as the paper PDF with a `_slides` suffix:
   `<leadauthor>_<shortpapername>_<venue>_<year>_slides.pdf`.
+- **Poster PDF**: source file path; same naming as slides but with a
+  `_poster` suffix:
+  `<leadauthor>_<shortpapername>_<venue>_<year>_poster.pdf`.
 - **DOI**: bare DOI string, e.g. `10.1109/ISPASS.2018.00017` (`""` if none).
 - **venueShort**: short form, e.g. `In *ISPASS 2018*` (`""` if none).
 - **Tags**: display tags, e.g. `Simulation`, `Networks`.
@@ -83,19 +86,21 @@ before writing anything.
    projects: []         # or list of project slugs
    pdf: pubs/<pdf-file>.pdf
    slides: pubs/<slides-file>.pdf   # omit this line entirely if no slides
+   poster: pubs/<poster-file>.pdf   # omit this line entirely if no poster
    bibPath: publication/<slug>/cite.bib
    ---
    ```
 
-   Note: `slides` is optional in the schema — omit the key when there are no
-   slides. `doi` and `venueShort` use `""` when absent. Match the formatting
-   of existing entries (see `src/content/publications/supersim_ispass/index.md`).
+   Note: `slides` and `poster` are optional in the schema — omit each key
+   when absent. `doi` and `venueShort` use `""` when absent. Match the
+   formatting of existing entries (see
+   `src/content/publications/supersim_ispass/index.md`).
 
 2. Copy the featured image to `src/content/publications/<slug>/featured.<ext>`
    (keep the original extension; `image:` references it as `./featured.<ext>`).
 
-3. Copy the PDF (and slides, if any) into `public/pubs/` using the confirmed
-   file names.
+3. Copy the PDF (and slides/poster, if any) into `public/pubs/` using the
+   confirmed file names.
 
 4. Write the BibTeX verbatim to `public/publication/<slug>/cite.bib`.
 
@@ -112,6 +117,7 @@ npm run validate && npm run check && npm test && npm run build
 ```
 
 `npm run validate` checks cross-references (authors, projects), slug
-uniqueness, and that `pdf`/`slides`/`bibPath` assets exist under `public/`.
+uniqueness, and that `pdf`/`slides`/`poster`/`bibPath` assets exist under
+`public/`.
 Fix any reported errors and re-run until green. Do not commit anything unless
 the user asks.

@@ -75,6 +75,14 @@ const pubUrl = `/publication/${pub.slug}/`;
         )
       }
       {
+        pub.poster !== undefined && (
+          <a class="btn-outline" href={`/${pub.poster}`}>
+            <Icon name="poster" size={16} />
+            Poster
+          </a>
+        )
+      }
+      {
         pub.doi !== "" && (
           <a
             class="btn-outline"

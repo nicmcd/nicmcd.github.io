@@ -43,8 +43,8 @@ handling.
   `slug`, `title`, `authors[]` (author slugs), `date`, `type` (`"1"` =
   conference paper, `"7"` = thesis), `venue`, `venueShort`, `abstract`,
   `summary`, `tags[]`, `doi`, `image`, `imageAlt`, `projects[]` (project
-  slugs), `pdf` (`pubs/....pdf`), optional `slides` (`pubs/....pdf`),
-  `bibPath` (`publication/<slug>/cite.bib`).
+  slugs), `pdf` (`pubs/....pdf`), optional `slides` and `poster`
+  (`pubs/....pdf`), `bibPath` (`publication/<slug>/cite.bib`).
 - `experience` (`src/content/experience.yaml`): `order` (explicit display
   order), `title`, `company`, `companyUrl`, `location`, `dateStart`,
   optional `dateEnd`, verbatim `description`.
@@ -67,8 +67,8 @@ URLs are a public contract. Do not rename, re-slug, or restructure routes.
   `1/` and `7/`, `/404.html`, `/index.json`, `/index.xml`,
   `/index.webmanifest`, `/robots.txt`, `/sitemap.xml`, and RSS feeds at their
   existing `index.xml` paths.
-- PDFs and slides stay under `/pubs/...`; citation downloads stay at
-  `/publication/<slug>/cite.bib`.
+- PDFs, slides, and posters stay under `/pubs/...`; citation downloads stay
+  at `/publication/<slug>/cite.bib`.
 - Tag URL slugs come from `tagSlug()` in `src/utils/tags.ts` (lowercase,
   `++` → `pp`, non-alphanumerics → `-`). Display tags like `Cpp` map to
   `/tags/cpp/`.
@@ -126,8 +126,8 @@ Use the tokens; do not introduce hard-coded values in components.
    frontmatter (see content model above). `authors` must reference existing
    author slugs; add new authors first if needed.
 2. Add `featured.*` next to `index.md`.
-3. Copy the PDF (and slides, if any) to `public/pubs/` and set `pdf`/`slides`
-   to `pubs/<file>.pdf`.
+3. Copy the PDF (and slides/poster, if any) to `public/pubs/` and set
+   `pdf`/`slides`/`poster` to `pubs/<file>.pdf`.
 4. Add the BibTeX file at `public/publication/<slug>/cite.bib` and set
    `bibPath` to `publication/<slug>/cite.bib`.
 5. If it has a new type, extend `publicationTypeLabels` in

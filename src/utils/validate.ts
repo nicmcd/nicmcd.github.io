@@ -27,6 +27,7 @@ export interface ValidationPublication {
   imageAlt: string;
   pdf: string;
   slides: string | undefined;
+  poster: string | undefined;
   bibPath: string;
 }
 
@@ -90,7 +91,7 @@ export function validateContent(input: ValidationInput): string[] {
     if (pub.imageAlt.trim().length === 0) {
       errors.push(`publication "${pub.slug}": missing image alt text`);
     }
-    for (const asset of [pub.pdf, pub.slides, pub.bibPath]) {
+    for (const asset of [pub.pdf, pub.slides, pub.poster, pub.bibPath]) {
       if (asset !== undefined && !existsSync(join(input.publicDir, asset))) {
         errors.push(`publication "${pub.slug}": missing asset "${asset}"`);
       }
