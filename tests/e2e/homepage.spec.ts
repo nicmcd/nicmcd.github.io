@@ -1,11 +1,11 @@
 import { test, expect } from "@playwright/test";
 
 const EXPECTED_FILTERS: Record<string, string[]> = {
-  All: ["libdes", "ParaMgmt", "TaskRun", "SuperSim", "DevSearch"],
+  All: ["Calculon", "libdes", "ParaMgmt", "TaskRun", "SuperSim", "DevSearch"],
   Networks: ["SuperSim"],
   Simulation: ["libdes", "SuperSim"],
   "C++": ["libdes", "SuperSim"],
-  Python: ["DevSearch", "ParaMgmt", "TaskRun"],
+  Python: ["Calculon", "DevSearch", "ParaMgmt", "TaskRun"],
 };
 
 test.describe("homepage", () => {
@@ -112,7 +112,7 @@ test.describe("homepage", () => {
       await toolbar.getByRole("button", { name: filter, exact: true }).click();
 
       const cards = page.locator(".project-card");
-      await expect(cards).toHaveCount(5);
+      await expect(cards).toHaveCount(6);
 
       const visible = cards.locator("visible=true");
       // Count visible cards via :not([hidden])
@@ -129,10 +129,10 @@ test.describe("homepage", () => {
     });
   }
 
-  test("all five projects render with images and external links preserved", async ({ page }) => {
+  test("all six projects render with images and external links preserved", async ({ page }) => {
     await page.goto("/");
     const cards = page.locator(".project-card");
-    await expect(cards).toHaveCount(5);
+    await expect(cards).toHaveCount(6);
     for (const card of await cards.all()) {
       await expect(card.locator("img")).toHaveAttribute("alt", /.+/);
     }

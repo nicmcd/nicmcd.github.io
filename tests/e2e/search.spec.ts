@@ -70,14 +70,15 @@ test.describe("search dialog", () => {
     await expect(page.locator(".search-result-link")).toHaveCount(0);
   });
 
-  test("indexes exactly the profile, five projects, and six publications", async ({ page }) => {
+  test("indexes exactly the profile, six projects, and six publications", async ({ page }) => {
     const response = await page.request.get("/index.json");
     expect(response.ok()).toBe(true);
     const docs = await response.json();
-    expect(docs).toHaveLength(12);
+    expect(docs).toHaveLength(13);
     const kinds = docs.map((d: { kind: string }) => d.kind).sort();
     expect(kinds).toEqual([
       "profile",
+      "project",
       "project",
       "project",
       "project",

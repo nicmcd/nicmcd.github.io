@@ -4,6 +4,7 @@ import { readFileSync } from "node:fs";
 const CANONICAL_ROUTES = [
   "/",
   "/project/",
+  "/project/calculon/",
   "/project/devsearch/",
   "/project/libdes/",
   "/project/paramgmt/",
@@ -127,10 +128,10 @@ test.describe("canonical routes", () => {
     });
   }
 
-  test("exactly five projects and six publications exist", async ({ page }) => {
+  test("exactly six projects and six publications exist", async ({ page }) => {
     const response = await page.request.get("/index.json");
     const docs = await response.json();
-    expect(docs.filter((d: { kind: string }) => d.kind === "project")).toHaveLength(5);
+    expect(docs.filter((d: { kind: string }) => d.kind === "project")).toHaveLength(6);
     expect(docs.filter((d: { kind: string }) => d.kind === "publication")).toHaveLength(6);
   });
 });

@@ -1,8 +1,9 @@
 import { describe, it, expect } from "vitest";
 import { matchesFilter } from "../../src/scripts/filter.ts";
 
-// Card tag sets mirroring the five migrated projects.
+// Card tag sets mirroring the six migrated projects.
 const cards: Record<string, string[]> = {
+  calculon: ["Python", "Machine Learning", "Modeling"],
   devsearch: ["Python", "Development"],
   libdes: ["Cpp", "Simulation"],
   paramgmt: ["Python", "Development"],
@@ -17,6 +18,7 @@ function visibleCards(filter: string): string[] {
 describe("project filtering", () => {
   it('"All" shows every project', () => {
     expect(visibleCards("*").sort()).toEqual([
+      "calculon",
       "devsearch",
       "libdes",
       "paramgmt",
@@ -39,6 +41,7 @@ describe("project filtering", () => {
 
   it('"Python" matches current behavior', () => {
     expect(visibleCards("Python").sort()).toEqual([
+      "calculon",
       "devsearch",
       "paramgmt",
       "taskrun",

@@ -19,7 +19,8 @@ tags:
 doi: 10.1145/3581784.3607102
 image: ./featured.png
 imageAlt: Bar charts of batch time and HBM memory consumption for running GPT3 175B across 4,096 GPUs with TP=8, PP=64, and DP=8, broken down by execution phase and data type
-projects: []
+projects:
+  - calculon
 pdf: pubs/mikhailisaev_calculon_sc_2023.pdf
 bibPath: publication/calculon_sc/cite.bib
 ---

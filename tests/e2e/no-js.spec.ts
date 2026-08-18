@@ -10,9 +10,9 @@ test.describe("no-JavaScript rendering", () => {
     await expect(page.getByRole("heading", { name: "Biography" })).toBeVisible();
     await expect(page.getByText(/senior research scientist at NVIDIA/)).toBeVisible();
 
-    // All five projects remain visible (no hidden-until-JS containers).
+    // All six projects remain visible (no hidden-until-JS containers).
     const cards = page.locator(".project-card");
-    await expect(cards).toHaveCount(5);
+    await expect(cards).toHaveCount(6);
     for (const card of await cards.all()) {
       await expect(card).toBeVisible();
     }

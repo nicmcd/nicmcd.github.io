@@ -10,6 +10,7 @@ import { test, expect } from "@playwright/test";
 const SEED_PAGES = [
   "/",
   "/project/",
+  "/project/calculon/",
   "/project/devsearch/",
   "/project/libdes/",
   "/project/paramgmt/",
