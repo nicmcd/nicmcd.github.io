@@ -13,11 +13,13 @@ const CANONICAL_ROUTES = [
   "/publication/hpsoc_thesis/",
   "/publication/hxrouting_sc/",
   "/publication/hyperx_sc/",
+  "/publication/paragraph_icpp/",
   "/publication/supersim_ispass/",
   "/tags/",
   "/tags/cpp/",
   "/tags/development/",
   "/tags/distributed-computing/",
+  "/tags/machine-learning/",
   "/tags/networks/",
   "/tags/python/",
   "/tags/security/",
@@ -32,10 +34,12 @@ const CANONICAL_ROUTES = [
   "/authors/dennis-floyd/",
   "/authors/doug-gibson/",
   "/authors/ivan-ivanov/",
+  "/authors/jeffrey-young/",
   "/authors/jens-domke/",
   "/authors/john-kim/",
   "/authors/mikhail-isaev/",
   "/authors/nicolas-dube/",
+  "/authors/richard-vuduc/",
   "/authors/satoshi-matsuoka/",
   "/authors/shinichi-miura/",
   "/authors/tomoya-yuki/",
@@ -53,6 +57,7 @@ const RSS_FEEDS = [
   "/tags/cpp/index.xml",
   "/tags/development/index.xml",
   "/tags/distributed-computing/index.xml",
+  "/tags/machine-learning/index.xml",
   "/tags/networks/index.xml",
   "/tags/python/index.xml",
   "/tags/security/index.xml",
@@ -67,10 +72,12 @@ const RSS_FEEDS = [
   "/authors/dennis-floyd/index.xml",
   "/authors/doug-gibson/index.xml",
   "/authors/ivan-ivanov/index.xml",
+  "/authors/jeffrey-young/index.xml",
   "/authors/jens-domke/index.xml",
   "/authors/john-kim/index.xml",
   "/authors/mikhail-isaev/index.xml",
   "/authors/nicolas-dube/index.xml",
+  "/authors/richard-vuduc/index.xml",
   "/authors/satoshi-matsuoka/index.xml",
   "/authors/shinichi-miura/index.xml",
   "/authors/tomoya-yuki/index.xml",
@@ -113,11 +120,11 @@ test.describe("canonical routes", () => {
     });
   }
 
-  test("exactly five projects and four publications exist", async ({ page }) => {
+  test("exactly five projects and five publications exist", async ({ page }) => {
     const response = await page.request.get("/index.json");
     const docs = await response.json();
     expect(docs.filter((d: { kind: string }) => d.kind === "project")).toHaveLength(5);
-    expect(docs.filter((d: { kind: string }) => d.kind === "publication")).toHaveLength(4);
+    expect(docs.filter((d: { kind: string }) => d.kind === "publication")).toHaveLength(5);
   });
 });
 
