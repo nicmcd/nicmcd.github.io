@@ -60,7 +60,9 @@ colors, and project filter definitions live in one typed module:
 Build-time validation (`src/utils/validate.ts`, run by `npm run validate` and
 by an Astro integration during `astro build`) checks cross-collection
 author/project/publication references, unique slugs, valid internal asset
-paths, valid dates, and required image alt text.
+paths, valid dates, and required image alt text (non-empty and free of the
+redundant words "image", "photo", and "picture", matching the Astro dev
+toolbar audit rule `a11y-img-redundant-alt`).
 
 ## URL-stability rules
 

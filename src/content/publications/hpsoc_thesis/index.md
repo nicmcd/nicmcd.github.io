@@ -16,7 +16,7 @@ tags:
   - Security
 doi: ""
 image: ./featured.png
-imageAlt: High-Performance Service-Oriented Computing featured image
+imageAlt: High-Performance Service-Oriented Computing featured graphic
 projects: []
 pdf: pubs/nicmcdonald_hpsoc_stanford_2016.pdf
 slides: pubs/nicmcdonald_hpsoc_stanford_2016_slides.pdf

@@ -109,6 +109,30 @@ describe("content relationship validation", () => {
     );
   });
 
+  it("rejects redundant words in project image alt text", () => {
+    const input = validInput(publicDir);
+    input.projects[0]!.imageAlt = "Project featured image";
+    expect(validateContent(input)).toContain(
+      'project "proj": image alt text contains redundant word (image, picture, photo)',
+    );
+  });
+
+  it("rejects redundant words in publication image alt text", () => {
+    const input = validInput(publicDir);
+    input.publications[0]!.imageAlt = "Photo of the results";
+    expect(validateContent(input)).toContain(
+      'publication "pub": image alt text contains redundant word (image, picture, photo)',
+    );
+  });
+
+  it("rejects redundant words in avatar alt text", () => {
+    const input = validInput(publicDir);
+    input.authors[0]!.avatarAlt = "Picture of the author";
+    expect(validateContent(input)).toContain(
+      'author "admin": avatar alt text contains redundant word (image, picture, photo)',
+    );
+  });
+
   it("rejects experience end dates before start dates", () => {
     const input = validInput(publicDir);
     input.experience[0]!.dateEnd = new Date("2019-01-01");

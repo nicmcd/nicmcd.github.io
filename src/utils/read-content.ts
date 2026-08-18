@@ -58,6 +58,7 @@ export function readContentForValidation(
     authors: authors.map((a) => ({
       slug: String(a.slug),
       primary: a.primary === true,
+      avatarAlt: a.avatarAlt === undefined ? undefined : String(a.avatarAlt),
     })),
     projects: projects.map((p) => ({
       slug: String(p.slug),

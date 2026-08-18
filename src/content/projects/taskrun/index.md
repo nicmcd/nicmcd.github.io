@@ -8,6 +8,6 @@ tags:
 date: "2013-12-09T00:00:00Z"
 externalUrl: https://github.com/nicmcd/taskrun
 image: ./featured.png
-imageAlt: TaskRun project featured image
+imageAlt: TaskRun project featured graphic
 relatedPublications: []
 ---

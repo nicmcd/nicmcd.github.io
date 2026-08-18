@@ -8,6 +8,6 @@ tags:
 date: "2014-08-06T00:00:00Z"
 externalUrl: https://github.com/google/paramgmt
 image: ./featured.jpg
-imageAlt: ParaMgmt project featured image
+imageAlt: ParaMgmt project featured graphic
 relatedPublications: []
 ---

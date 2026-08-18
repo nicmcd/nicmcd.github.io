@@ -19,7 +19,7 @@ tags:
   - Networks
 doi: 10.1109/ISPASS.2018.00017
 image: ./featured.png
-imageAlt: SuperSim publication featured image
+imageAlt: SuperSim publication featured graphic
 projects:
   - supersim
 pdf: pubs/nicmcdonald_supersim_ispass_2018.pdf
