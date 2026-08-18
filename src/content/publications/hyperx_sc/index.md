@@ -24,7 +24,7 @@ doi: 10.1145/3295500.3356140
 image: ./featured.png
 imageAlt: Dual Plane Network
 projects: []
-pdf: pubs/nicmcdonald_hyperx_sc_2019.pdf
-slides: pubs/nicmcdonald_hyperx_sc_2019_slides.pdf
+pdf: pubs/jensdomke_hyperx_sc_2019.pdf
+slides: pubs/jensdomke_hyperx_sc_2019_slides.pdf
 bibPath: publication/hyperx_sc/cite.bib
 ---
