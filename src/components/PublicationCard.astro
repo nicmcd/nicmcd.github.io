@@ -1,0 +1,110 @@
+---
+import { Image } from "astro:assets";
+import type { Publication, Author } from "../utils/content.ts";
+import { authorNames } from "../utils/content.ts";
+import { tagSlug } from "../utils/tags.ts";
+import Icon from "./Icon.astro";
+import CiteDialog from "./CiteDialog.astro";
+
+interface Props {
+  publication: Publication;
+  authorsBySlug: Map<string, Author>;
+  /** Show the featured image (compact lists may hide it). */
+  showImage?: boolean;
+}
+
+const { publication, authorsBySlug, showImage = true } = Astro.props;
+const pub = publication.data;
+const authors = authorNames(publication, authorsBySlug);
+const pubUrl = `/publication/${pub.slug}/`;
+---
+
+<article class="pub-item">
+  {
+    showImage && (
+      <a href={pubUrl} tabindex="-1" aria-hidden="true">
+        <Image
+          src={pub.image}
+          alt={pub.imageAlt}
+          widths={[320, 640]}
+          sizes="(min-width: 48rem) 25vw, 100vw"
+          width={640}
+          height={320}
+        />
+      </a>
+    )
+  }
+  <div>
+    <h3 class="pub-title">
+      <a href={pubUrl}>{pub.title}</a>
+    </h3>
+    <p class="pub-authors">
+      {
+        authors.map((author, i) => (
+          <>
+            <a href={`/authors/${author.slug}/`}>{author.name}</a>
+            {i < authors.length - 1 ? ", " : ""}
+          </>
+        ))
+      }
+    </p>
+    <p class="pub-summary">{pub.summary}</p>
+    <div class="button-row">
+      <a class="btn-outline" href={`/${pub.pdf}`}>
+        <Icon name="file-text" size={16} />
+        PDF
+      </a>
+      <button type="button" class="btn-outline" data-cite-open={`cite-${pub.slug}`}>
+        <Icon name="quote" size={16} />
+        Cite
+      </button>
+      {
+        pub.projects.map((projectSlug) => (
+          <a class="btn-outline" href={`/project/${projectSlug}/`}>
+            <Icon name="code" size={16} />
+            Project
+          </a>
+        ))
+      }
+      {
+        pub.slides !== undefined && (
+          <a class="btn-outline" href={`/${pub.slides}`}>
+            <Icon name="slides" size={16} />
+            Slides
+          </a>
+        )
+      }
+      {
+        pub.doi !== "" && (
+          <a
+            class="btn-outline"
+            href={`https://doi.org/${pub.doi}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label={`DOI ${pub.doi} (external link)`}
+          >
+            <Icon name="link" size={16} />
+            DOI
+          </a>
+        )
+      }
+    </div>
+    <ul class="card-tags" aria-label="Topics">
+      {
+        pub.tags.map((tag) => (
+          <li>
+            <a class="tag" href={`/tags/${tagSlug(tag)}/`}>
+              {tag}
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</article>
+<CiteDialog slug={pub.slug} bibPath={pub.bibPath} />
+
+<script>
+  import { initCiteDialogs } from "../scripts/cite.ts";
+  initCiteDialogs();
+</script>

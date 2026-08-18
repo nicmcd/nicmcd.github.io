@@ -1,0 +1,42 @@
+---
+import Icon from "./Icon.astro";
+import { loadBibtex } from "../utils/citations.ts";
+
+interface Props {
+  /** Publication slug; used for the dialog id. */
+  slug: string;
+  /** Path to the served .bib asset, e.g. "publication/hpsoc_thesis/cite.bib". */
+  bibPath: string;
+}
+
+const { slug, bibPath } = Astro.props;
+const bibtex = loadBibtex(bibPath);
+const downloadUrl = `/${bibPath}`;
+---
+
+<dialog class="cite-dialog" id={`cite-${slug}`} aria-labelledby={`cite-${slug}-title`}>
+  <div class="dialog-inner">
+    <div class="dialog-header">
+      <h2 id={`cite-${slug}-title`}>Cite</h2>
+      <button
+        type="button"
+        class="icon-button"
+        data-cite-close
+        aria-label="Close citation dialog"
+      >
+        <Icon name="close" size={22} />
+      </button>
+    </div>
+    <pre data-cite-content><code>{bibtex}</code></pre>
+    <div class="button-row">
+      <button type="button" class="btn-outline" data-cite-copy>
+        <Icon name="copy" size={16} />
+        <span data-cite-copy-label>Copy</span>
+      </button>
+      <a class="btn-outline" href={downloadUrl} download>
+        <Icon name="download" size={16} />
+        Download
+      </a>
+    </div>
+  </div>
+</dialog>

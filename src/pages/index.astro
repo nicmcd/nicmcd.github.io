@@ -1,0 +1,248 @@
+---
+import { Image } from "astro:assets";
+import { render } from "astro:content";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Icon from "../components/Icon.astro";
+import ProjectCard from "../components/ProjectCard.astro";
+import PublicationCard from "../components/PublicationCard.astro";
+import { site } from "../site.config.ts";
+import {
+  getProjectsSorted,
+  getPublicationsSorted,
+  getAuthorsBySlug,
+  getPrimaryAuthor,
+  getExperienceSorted,
+  aggregateTags,
+} from "../utils/content.ts";
+import { formatDateRange } from "../utils/dates.ts";
+
+const [projects, publications, authorsBySlug, admin, experience] =
+  await Promise.all([
+    getProjectsSorted(),
+    getPublicationsSorted(),
+    getAuthorsBySlug(),
+    getPrimaryAuthor(),
+    getExperienceSorted(),
+  ]);
+
+const tags = aggregateTags(projects, publications);
+const { Content: Biography } = await render(admin);
+const profile = admin.data;
+---
+
+<BaseLayout title={site.title}>
+  {/* 1. Biography / profile, interests, education */}
+  <section class="section" id="about" aria-labelledby="about-title">
+    <div class="container">
+      <div class="profile-grid">
+        <div class="profile-card">
+          {
+            profile.avatar !== undefined && (
+              <Image
+                class="profile-avatar"
+                src={profile.avatar}
+                alt={profile.avatarAlt ?? `Portrait of ${profile.name}`}
+                widths={[220, 440]}
+                sizes="(min-width: 62rem) 220px, 40vw"
+                width={440}
+                height={440}
+              />
+            )
+          }
+          <h1 class="profile-name">{profile.name}</h1>
+          {profile.role !== undefined && <p class="profile-role">{profile.role}</p>}
+          {
+            profile.organization !== undefined && (
+              <p class="profile-org">
+                <a
+                  href={profile.organization.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={`${profile.organization.name} (external link)`}
+                >
+                  {profile.organization.name}
+                </a>
+              </p>
+            )
+          }
+          <ul class="social-links" aria-label="Social profiles">
+            {
+              profile.social.map((social) => (
+                <li>
+                  <a
+                    href={social.url}
+                    aria-label={social.label}
+                    {...(social.url.startsWith("http")
+                      ? { target: "_blank", rel: "noopener noreferrer" }
+                      : {})}
+                  >
+                    <Icon name={social.icon} size={24} />
+                  </a>
+                </li>
+              ))
+            }
+          </ul>
+        </div>
+        <div>
+          <h2 id="about-title">Biography</h2>
+          <Biography />
+
+          <h3>Interests</h3>
+          <ul class="interests-list">
+            {profile.interests.map((interest) => <li>{interest}</li>)}
+          </ul>
+
+          <h3>Education</h3>
+          <ul class="education-list">
+            {
+              profile.education.map((edu) => (
+                <li>
+                  <span class="edu-icon">
+                    <Icon name="graduation-cap" size={20} />
+                  </span>
+                  <div>
+                    <p class="edu-course">
+                      {edu.course}, {edu.year}
+                    </p>
+                    <p class="edu-institution">{edu.institution}</p>
+                  </div>
+                </li>
+              ))
+            }
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {/* 2. Filterable projects */}
+  <section class="section" id="projects" aria-labelledby="projects-title">
+    <div class="container">
+      <h2 id="projects-title" class="section-title">Projects</h2>
+      <ul class="filter-toolbar" data-filter-toolbar aria-label="Project filters">
+        {
+          site.projectFilters.map((filter, i) => (
+            <li>
+              <button
+                type="button"
+                class="filter-button"
+                data-filter-tag={filter.tag}
+                aria-pressed={i === 0 ? "true" : "false"}
+              >
+                {filter.name}
+              </button>
+            </li>
+          ))
+        }
+      </ul>
+      <div class="card-grid">
+        {projects.map((project) => <ProjectCard project={project} />)}
+      </div>
+    </div>
+  </section>
+
+  {/* 3. Publications */}
+  <section class="section" id="publications" aria-labelledby="publications-title">
+    <div class="container">
+      <h2 id="publications-title" class="section-title">Publications</h2>
+      <div class="pub-list">
+        {
+          publications.map((publication) => (
+            <PublicationCard publication={publication} authorsBySlug={authorsBySlug} />
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  {/* 4. Experience timeline */}
+  <section class="section" id="experience" aria-labelledby="experience-title">
+    <div class="container">
+      <h2 id="experience-title" class="section-title">Experience</h2>
+      <ul class="timeline">
+        {
+          experience.map((item) => (
+            <li class="timeline-item">
+              <span class="timeline-date">
+                {formatDateRange(item.data.dateStart, item.data.dateEnd)}
+              </span>
+              <div>
+                <h3 class="timeline-title">{item.data.title}</h3>
+                <p>
+                  <a
+                    class="timeline-company"
+                    href={item.data.companyUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={`${item.data.company} (external link)`}
+                  >
+                    {item.data.company}
+                  </a>
+                  <br />
+                  <span class="timeline-location">
+                    <Icon name="map-pin" size={14} />
+                    {item.data.location}
+                  </span>
+                </p>
+                <p>{item.data.description}</p>
+              </div>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+
+  {/* 5. Popular topics */}
+  <section class="section" id="tags" aria-labelledby="tags-title">
+    <div class="container">
+      <h2 id="tags-title" class="section-title">Popular Topics</h2>
+      <ul class="tag-cloud">
+        {
+          tags.map((tag) => (
+            <li>
+              <a href={`/tags/${tag.slug}/`}>{tag.name}</a>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+
+  {/* 6. Contact */}
+  <section class="section" id="contact" aria-labelledby="contact-title">
+    <div class="container">
+      <h2 id="contact-title" class="section-title">Contact</h2>
+      <ul class="contact-list">
+        <li>
+          <a href={`mailto:${site.email}`}>{site.email}</a>
+        </li>
+        <li>
+          <ul class="social-links" aria-label="Social profiles">
+            {
+              profile.social
+                .filter((social) => social.url.startsWith("http"))
+                .map((social) => (
+                  <li>
+                    <a
+                      href={social.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label={`${social.label} (external link)`}
+                    >
+                      <Icon name={social.icon} size={24} />
+                    </a>
+                  </li>
+                ))
+            }
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </section>
+</BaseLayout>
+
+<script>
+  import { initProjectFilter } from "../scripts/filter.ts";
+  initProjectFilter();
+</script>

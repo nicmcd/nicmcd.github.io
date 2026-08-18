@@ -1,0 +1,104 @@
+---
+import { Image } from "astro:assets";
+import type { GetStaticPaths } from "astro";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Icon from "../../components/Icon.astro";
+import AuthorBox from "../../components/AuthorBox.astro";
+import PublicationCard from "../../components/PublicationCard.astro";
+import {
+  getProjectsSorted,
+  getPublicationsSorted,
+  getAuthorsBySlug,
+} from "../../utils/content.ts";
+import { tagSlug } from "../../utils/tags.ts";
+import { formatDate } from "../../utils/dates.ts";
+
+export const getStaticPaths = (async () => {
+  const projects = await getProjectsSorted();
+  return projects.map((project) => ({
+    params: { slug: project.data.slug },
+    props: { project },
+  }));
+}) satisfies GetStaticPaths;
+
+const { project } = Astro.props;
+const data = project.data;
+
+const [publications, authorsBySlug] = await Promise.all([
+  getPublicationsSorted(),
+  getAuthorsBySlug(),
+]);
+const related = publications.filter((pub) =>
+  data.relatedPublications.includes(pub.data.slug),
+);
+---
+
+<BaseLayout
+  title={data.title}
+  description={data.summary}
+  image={`/project/${data.slug}/featured.png`}
+>
+  <section class="section">
+    <div class="container">
+      <div class="article-header">
+        <h1>{data.title}</h1>
+        <p class="article-metadata">
+          <span class="timeline-location">
+            <Icon name="calendar" size={16} />
+            {formatDate(data.date)}
+          </span>
+        </p>
+        <div class="button-row" style="justify-content: center;">
+          <a
+            class="btn-outline"
+            href={data.externalUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label={`Go to the ${data.title} project site (external link)`}
+          >
+            <Icon name="external-link" size={16} />
+            Go to Project Site
+          </a>
+        </div>
+        <ul class="card-tags" style="justify-content: center; margin-top: var(--space-4);">
+          {
+            data.tags.map((tag) => (
+              <li>
+                <a class="tag" href={`/tags/${tagSlug(tag)}/`}>
+                  {tag}
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+
+      <div class="article-body">
+        <Image
+          src={data.image}
+          alt={data.imageAlt}
+          widths={[640, 1280]}
+          sizes="(min-width: 50rem) 50rem, 100vw"
+          width={1280}
+          height={640}
+        />
+        <p>{data.summary}</p>
+      </div>
+
+      {
+        related.length > 0 && (
+          <div class="article-body">
+            <h2>Publications</h2>
+            <div class="pub-list">
+              {related.map((pub) => (
+                <PublicationCard publication={pub} authorsBySlug={authorsBySlug} />
+              ))}
+            </div>
+          </div>
+        )
+      }
+
+      <AuthorBox />
+    </div>
+  </section>
+</BaseLayout>

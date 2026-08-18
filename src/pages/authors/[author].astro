@@ -1,0 +1,158 @@
+---
+import { getCollection } from "astro:content";
+import { Image } from "astro:assets";
+import { render } from "astro:content";
+import type { GetStaticPaths } from "astro";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Icon from "../../components/Icon.astro";
+import PublicationCard from "../../components/PublicationCard.astro";
+import { getPublicationsSorted, getAuthorsBySlug } from "../../utils/content.ts";
+
+export const getStaticPaths = (async () => {
+  const authors = await getCollection("authors");
+  return authors.map((author) => ({
+    params: { author: author.data.slug },
+    props: { author },
+  }));
+}) satisfies GetStaticPaths;
+
+const { author } = Astro.props;
+const profile = author.data;
+
+const [publications, authorsBySlug] = await Promise.all([
+  getPublicationsSorted(),
+  getAuthorsBySlug(),
+]);
+const authored = publications.filter((p) =>
+  p.data.authors.includes(profile.slug),
+);
+
+const hasBody = (author.body ?? "").trim().length > 0;
+const { Content } = hasBody ? await render(author) : { Content: null };
+---
+
+<BaseLayout title={profile.name} description={profile.bio ?? `Content by ${profile.name}.`}>
+  <section class="section">
+    <div class="container">
+      <div class="profile-grid">
+        <div class="profile-card">
+          {
+            profile.avatar !== undefined && (
+              <Image
+                class="profile-avatar"
+                src={profile.avatar}
+                alt={profile.avatarAlt ?? `Portrait of ${profile.name}`}
+                widths={[220, 440]}
+                sizes="(min-width: 62rem) 220px, 40vw"
+                width={440}
+                height={440}
+              />
+            )
+          }
+          <h1 class="profile-name">{profile.name}</h1>
+          {profile.role !== undefined && <p class="profile-role">{profile.role}</p>}
+          {
+            profile.organization !== undefined && (
+              <p class="profile-org">
+                <a
+                  href={profile.organization.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={`${profile.organization.name} (external link)`}
+                >
+                  {profile.organization.name}
+                </a>
+              </p>
+            )
+          }
+          {
+            profile.social.length > 0 && (
+              <ul class="social-links" aria-label="Social profiles">
+                {profile.social.map((social) => (
+                  <li>
+                    <a
+                      href={social.url}
+                      aria-label={social.label}
+                      {...(social.url.startsWith("http")
+                        ? { target: "_blank", rel: "noopener noreferrer" }
+                        : {})}
+                    >
+                      <Icon name={social.icon} size={24} />
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            )
+          }
+        </div>
+        <div>
+          {Content !== null && <Content />}
+
+          {
+            profile.interests.length > 0 && (
+              <>
+                <h2>Interests</h2>
+                <ul class="interests-list">
+                  {profile.interests.map((interest) => (
+                    <li>{interest}</li>
+                  ))}
+                </ul>
+              </>
+            )
+          }
+
+          {
+            profile.education.length > 0 && (
+              <>
+                <h2>Education</h2>
+                <ul class="education-list">
+                  {profile.education.map((edu) => (
+                    <li>
+                      <span class="edu-icon">
+                        <Icon name="graduation-cap" size={20} />
+                      </span>
+                      <div>
+                        <p class="edu-course">
+                          {edu.course}, {edu.year}
+                        </p>
+                        <p class="edu-institution">{edu.institution}</p>
+                      </div>
+                    </li>
+                  ))}
+                </ul>
+              </>
+            )
+          }
+
+          {
+            authored.length > 0 && (
+              <>
+                <h2>Latest</h2>
+                <ul class="interests-list">
+                  {authored.map((pub) => (
+                    <li>
+                      <a href={`/publication/${pub.data.slug}/`}>{pub.data.title}</a>
+                    </li>
+                  ))}
+                </ul>
+              </>
+            )
+          }
+        </div>
+      </div>
+
+      {
+        authored.length > 0 && (
+          <div style="margin-top: var(--space-7);">
+            <h2 class="section-title">Publications</h2>
+            <div class="pub-list">
+              {authored.map((pub) => (
+                <PublicationCard publication={pub} authorsBySlug={authorsBySlug} />
+              ))}
+            </div>
+          </div>
+        )
+      }
+    </div>
+  </section>
+</BaseLayout>

@@ -1,0 +1,90 @@
+---
+import { Image } from "astro:assets";
+import { getPrimaryAuthor } from "../utils/content.ts";
+import Icon from "./Icon.astro";
+
+const author = await getPrimaryAuthor();
+const profile = author.data;
+---
+
+<aside class="author-box" aria-label="About the author">
+  {
+    profile.avatar !== undefined && (
+      <Image
+        class="author-box-avatar"
+        src={profile.avatar}
+        alt={profile.avatarAlt ?? `Portrait of ${profile.name}`}
+        width={80}
+        height={80}
+      />
+    )
+  }
+  <div>
+    <p class="author-box-name">
+      <a href={`/authors/${profile.slug}/`}>{profile.name}</a>
+    </p>
+    {profile.role !== undefined && <p class="author-box-role">{profile.role}</p>}
+    {profile.bio !== undefined && <p class="author-box-bio">{profile.bio}</p>}
+    <ul class="social-links" aria-label="Social profiles">
+      {
+        profile.social.map((social) => (
+          <li>
+            <a
+              href={social.url}
+              aria-label={social.label}
+              {...(social.url.startsWith("http")
+                ? { target: "_blank", rel: "noopener noreferrer" }
+                : {})}
+            >
+              <Icon name={social.icon} size={20} />
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</aside>
+
+<style>
+  .author-box {
+    display: flex;
+    gap: var(--space-4);
+    align-items: flex-start;
+    max-width: var(--container-narrow);
+    margin: var(--space-7) auto 0;
+    padding: var(--space-5);
+    border: 1px solid var(--color-card-border);
+    border-radius: var(--radius-md);
+    background: var(--color-card-bg);
+  }
+
+  .author-box-avatar {
+    border-radius: var(--radius-round);
+    flex-shrink: 0;
+  }
+
+  .author-box-name {
+    margin: 0;
+    font-weight: 700;
+  }
+
+  .author-box-name a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  .author-box-role {
+    color: var(--color-muted);
+    font-size: var(--font-size-sm);
+    margin: 0 0 var(--space-2);
+  }
+
+  .author-box-bio {
+    font-size: var(--font-size-sm);
+    margin: 0 0 var(--space-2);
+  }
+
+  .author-box .social-links {
+    justify-content: flex-start;
+  }
+</style>

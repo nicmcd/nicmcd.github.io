@@ -1,0 +1,178 @@
+---
+import { Image } from "astro:assets";
+import type { GetStaticPaths } from "astro";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Icon from "../../components/Icon.astro";
+import AuthorBox from "../../components/AuthorBox.astro";
+import ShareLinks from "../../components/ShareLinks.astro";
+import CiteDialog from "../../components/CiteDialog.astro";
+import {
+  getPublicationsSorted,
+  getAuthorsBySlug,
+  authorNames,
+} from "../../utils/content.ts";
+import { tagSlug, publicationTypeLabel } from "../../utils/tags.ts";
+import { formatPublicationDate, formatIsoDate } from "../../utils/dates.ts";
+import { renderEmphasis } from "../../utils/emphasis.ts";
+
+export const getStaticPaths = (async () => {
+  const publications = await getPublicationsSorted();
+  return publications.map((publication) => ({
+    params: { slug: publication.data.slug },
+    props: { publication },
+  }));
+}) satisfies GetStaticPaths;
+
+const { publication } = Astro.props;
+const pub = publication.data;
+const authorsBySlug = await getAuthorsBySlug();
+const authors = authorNames(publication, authorsBySlug);
+const pubPath = `/publication/${pub.slug}/`;
+---
+
+<BaseLayout
+  title={pub.title}
+  description={pub.summary}
+  image={`/publication/${pub.slug}/featured.png`}
+  ogType="article"
+>
+  <section class="section">
+    <div class="container">
+      <div class="article-header">
+        <h1>{pub.title}</h1>
+        <p class="pub-authors">
+          {
+            authors.map((author, i) => (
+              <>
+                <a href={`/authors/${author.slug}/`}>{author.name}</a>
+                {i < authors.length - 1 ? ", " : ""}
+              </>
+            ))
+          }
+        </p>
+        <p class="article-metadata">
+          <time datetime={formatIsoDate(pub.date)}>
+            {formatPublicationDate(pub.date)}
+          </time>
+        </p>
+        <div class="button-row" style="justify-content: center;">
+          <a class="btn-outline" href={`/${pub.pdf}`}>
+            <Icon name="file-text" size={16} />
+            PDF
+          </a>
+          <button type="button" class="btn-outline" data-cite-open={`cite-${pub.slug}`}>
+            <Icon name="quote" size={16} />
+            Cite
+          </button>
+          {
+            pub.projects.map((projectSlug) => (
+              <a class="btn-outline" href={`/project/${projectSlug}/`}>
+                <Icon name="code" size={16} />
+                Project
+              </a>
+            ))
+          }
+          {
+            pub.slides !== undefined && (
+              <a class="btn-outline" href={`/${pub.slides}`}>
+                <Icon name="slides" size={16} />
+                Slides
+              </a>
+            )
+          }
+          {
+            pub.doi !== "" && (
+              <a
+                class="btn-outline"
+                href={`https://doi.org/${pub.doi}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={`DOI ${pub.doi} (external link)`}
+              >
+                <Icon name="link" size={16} />
+                DOI
+              </a>
+            )
+          }
+        </div>
+        <ShareLinks path={pubPath} title={pub.title} />
+      </div>
+
+      <div class="article-body">
+        <h2>Abstract</h2>
+        <p>{pub.abstract}</p>
+
+        <Image
+          src={pub.image}
+          alt={pub.imageAlt}
+          widths={[640, 1280]}
+          sizes="(min-width: 50rem) 50rem, 100vw"
+          width={1280}
+          height={640}
+        />
+
+        <table class="metadata-table">
+          <tbody>
+            <tr>
+              <th scope="row">Type</th>
+              <td>
+                <a href={`/publication_types/${pub.type}/`}>
+                  {publicationTypeLabel(pub.type)}
+                </a>
+              </td>
+            </tr>
+            <tr>
+              <th scope="row">Publication</th>
+              <td set:html={renderEmphasis(pub.venue)} />
+            </tr>
+            {
+              pub.venueShort !== "" && (
+                <tr>
+                  <th scope="row">Publication (short)</th>
+                  <td set:html={renderEmphasis(pub.venueShort)} />
+                </tr>
+              )
+            }
+            {
+              pub.doi !== "" && (
+                <tr>
+                  <th scope="row">DOI</th>
+                  <td>
+                    <a
+                      href={`https://doi.org/${pub.doi}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label={`DOI ${pub.doi} (external link)`}
+                    >
+                      {pub.doi}
+                    </a>
+                  </td>
+                </tr>
+              )
+            }
+          </tbody>
+        </table>
+
+        <ul class="card-tags" aria-label="Topics">
+          {
+            pub.tags.map((tag) => (
+              <li>
+                <a class="tag" href={`/tags/${tagSlug(tag)}/`}>
+                  {tag}
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+
+      <AuthorBox />
+    </div>
+  </section>
+  <CiteDialog slug={pub.slug} bibPath={pub.bibPath} />
+</BaseLayout>
+
+<script>
+  import { initCiteDialogs } from "../../scripts/cite.ts";
+  initCiteDialogs();
+</script>

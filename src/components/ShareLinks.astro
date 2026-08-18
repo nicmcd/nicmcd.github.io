@@ -1,0 +1,108 @@
+---
+import { site } from "../site.config.ts";
+import Icon, { type IconName } from "./Icon.astro";
+
+interface Props {
+  /** Absolute path of the page being shared, e.g. "/publication/hxrouting_sc/". */
+  path: string;
+  /** Page title used by share endpoints. */
+  title: string;
+}
+
+const { path, title } = Astro.props;
+const url = new URL(path, site.url).href;
+const encodedUrl = encodeURIComponent(url);
+const encodedTitle = encodeURIComponent(title);
+
+interface ShareTarget {
+  id: string;
+  label: string;
+  icon: IconName;
+  href: string;
+}
+
+// URL-based share endpoints that still work; obsolete endpoints omitted.
+const targets: ShareTarget[] = [
+  {
+    id: "x",
+    label: "Share on X (Twitter)",
+    icon: "x",
+    href: `https://twitter.com/intent/tweet?url=${encodedUrl}&text=${encodedTitle}`,
+  },
+  {
+    id: "facebook",
+    label: "Share on Facebook",
+    icon: "facebook",
+    href: `https://www.facebook.com/sharer.php?u=${encodedUrl}&t=${encodedTitle}`,
+  },
+  {
+    id: "email",
+    label: "Share by email",
+    icon: "envelope",
+    href: `mailto:?subject=${encodedTitle}&body=${encodedUrl}`,
+  },
+  {
+    id: "linkedin",
+    label: "Share on LinkedIn",
+    icon: "linkedin",
+    href: `https://www.linkedin.com/sharing/share-offsite/?url=${encodedUrl}`,
+  },
+  {
+    id: "whatsapp",
+    label: "Share on WhatsApp",
+    icon: "whatsapp",
+    href: `https://web.whatsapp.com/send?text=${encodedTitle}%20${encodedUrl}`,
+  },
+  {
+    id: "weibo",
+    label: "Share on Weibo",
+    icon: "weibo",
+    href: `https://service.weibo.com/share/share.php?url=${encodedUrl}&title=${encodedTitle}`,
+  },
+];
+---
+
+<ul class="share-links" aria-label="Share this page">
+  {
+    targets.map((target) => (
+      <li>
+        <a
+          href={target.href}
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label={`${target.label} (external link)`}
+          class="share-link"
+        >
+          <Icon name={target.icon} size={20} />
+        </a>
+      </li>
+    ))
+  }
+</ul>
+
+<style>
+  .share-links {
+    display: flex;
+    gap: var(--space-2);
+    list-style: none;
+    padding: 0;
+    margin: var(--space-4) 0;
+    justify-content: center;
+  }
+
+  .share-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.5rem;
+    height: 2.5rem;
+    border: 1px solid var(--color-card-border);
+    border-radius: var(--radius-round);
+    color: var(--color-muted);
+  }
+
+  .share-link:hover {
+    color: var(--color-primary);
+    border-color: var(--color-primary);
+  }
+</style>

@@ -1,0 +1,43 @@
+---
+import { Image } from "astro:assets";
+import type { Project } from "../utils/content.ts";
+import { tagSlug } from "../utils/tags.ts";
+
+interface Props {
+  project: Project;
+}
+
+const { project } = Astro.props;
+const data = project.data;
+const projectUrl = `/project/${data.slug}/`;
+---
+
+<article class="card project-card" data-tags={data.tags.join(" ")}>
+  <a href={projectUrl} tabindex="-1" aria-hidden="true">
+    <Image
+      src={data.image}
+      alt={data.imageAlt}
+      widths={[400, 800]}
+      sizes="(min-width: 48rem) 50vw, 100vw"
+      width={800}
+      height={400}
+    />
+  </a>
+  <div class="card-body">
+    <h3 class="card-title">
+      <a href={projectUrl}>{data.title}</a>
+    </h3>
+    <p class="card-text">{data.summary}</p>
+    <ul class="card-tags" aria-label="Topics">
+      {
+        data.tags.map((tag) => (
+          <li>
+            <a class="tag" href={`/tags/${tagSlug(tag)}/`}>
+              {tag}
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</article>

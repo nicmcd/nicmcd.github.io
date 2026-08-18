@@ -1,0 +1,48 @@
+---
+import Icon from "./Icon.astro";
+---
+
+<dialog class="search-dialog" data-search-dialog aria-label="Search">
+  <div class="dialog-inner">
+    <div class="dialog-header">
+      <h2 id="search-dialog-title">Search</h2>
+      <button
+        type="button"
+        class="icon-button"
+        data-search-close
+        aria-label="Close search"
+      >
+        <Icon name="close" size={22} />
+      </button>
+    </div>
+    <input
+      type="search"
+      class="search-input"
+      data-search-input
+      placeholder="Search..."
+      aria-label="Search query"
+      autocapitalize="off"
+      autocomplete="off"
+      autocorrect="off"
+      spellcheck="false"
+      role="combobox"
+      aria-expanded="true"
+      aria-controls="search-results"
+      aria-activedescendant=""
+    />
+    <ul
+      class="search-results-list"
+      id="search-results"
+      data-search-results
+      role="listbox"
+      aria-labelledby="search-dialog-title"
+    >
+    </ul>
+    <p class="search-empty" data-search-empty hidden>No results found.</p>
+  </div>
+</dialog>
+
+<script>
+  import { initSearch } from "../scripts/search.ts";
+  initSearch();
+</script>

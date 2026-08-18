@@ -1,0 +1,25 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import PublicationCard from "../../components/PublicationCard.astro";
+import { getPublicationsSorted, getAuthorsBySlug } from "../../utils/content.ts";
+
+const [publications, authorsBySlug] = await Promise.all([
+  getPublicationsSorted(),
+  getAuthorsBySlug(),
+]);
+---
+
+<BaseLayout title="Publications" description="Publications by Nic McDonald.">
+  <section class="section">
+    <div class="container">
+      <h1 class="section-title">Publications</h1>
+      <div class="pub-list">
+        {
+          publications.map((publication) => (
+            <PublicationCard publication={publication} authorsBySlug={authorsBySlug} />
+          ))
+        }
+      </div>
+    </div>
+  </section>
+</BaseLayout>

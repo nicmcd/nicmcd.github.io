@@ -1,0 +1,103 @@
+---
+import { site } from "../site.config.ts";
+import Icon from "./Icon.astro";
+
+interface Props {
+  /** Section id currently active (homepage scrollspy sets this dynamically). */
+  activeSection?: string;
+}
+
+const { activeSection } = Astro.props;
+---
+
+<header class="site-header">
+  <div class="container">
+    <a class="navbar-brand" href="/">{site.title}</a>
+
+    <button
+      type="button"
+      class="nav-toggle"
+      aria-expanded="false"
+      aria-controls="site-nav"
+      aria-label="Toggle navigation"
+    >
+      <Icon name="menu" size={22} />
+    </button>
+
+    <nav class="site-nav" id="site-nav" aria-label="Main navigation" hidden>
+      <ul>
+        {
+          site.navigation.map((item) => (
+            <li>
+              <a
+                class="nav-link"
+                href={item.url}
+                data-section={item.sectionId}
+                aria-current={
+                  item.sectionId !== undefined && item.sectionId === activeSection
+                    ? "true"
+                    : undefined
+                }
+                {...(item.external
+                  ? { target: "_blank", rel: "noopener noreferrer" }
+                  : {})}
+              >
+                {item.name}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </nav>
+
+    <div class="header-actions">
+      <button
+        type="button"
+        class="icon-button"
+        data-search-open
+        aria-label="Open search"
+        aria-keyshortcuts="/"
+      >
+        <Icon name="search" size={22} />
+      </button>
+      <button
+        type="button"
+        class="icon-button"
+        data-theme-toggle
+        aria-label="Switch theme"
+      >
+        <span class="theme-icon-when-light"><Icon name="moon" size={22} /></span>
+        <span class="theme-icon-when-dark"><Icon name="sun" size={22} /></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<style>
+  .theme-icon-when-dark {
+    display: none;
+  }
+
+  :global([data-theme="dark"]) .theme-icon-when-dark {
+    display: inline-flex;
+  }
+
+  :global([data-theme="dark"]) .theme-icon-when-light {
+    display: none;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :global(:root:not([data-theme="light"])) .theme-icon-when-dark {
+      display: inline-flex;
+    }
+
+    :global(:root:not([data-theme="light"])) .theme-icon-when-light {
+      display: none;
+    }
+  }
+</style>
+
+<script>
+  import { initHeader } from "../scripts/header.ts";
+  initHeader();
+</script>

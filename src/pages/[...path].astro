@@ -1,0 +1,47 @@
+---
+import type { GetStaticPaths } from "astro";
+import { site } from "../site.config.ts";
+import { legacyRedirects } from "../utils/redirects.ts";
+import { getProjectsSorted, getPublicationsSorted, aggregateTags } from "../utils/content.ts";
+
+/**
+ * Lightweight no-index compatibility pages for obsolete generated URLs.
+ * Each page carries a canonical link, an immediate meta refresh, a
+ * location.replace script, and a visible fallback link.
+ */
+
+export const getStaticPaths = (async () => {
+  const [projects, publications] = await Promise.all([
+    getProjectsSorted(),
+    getPublicationsSorted(),
+  ]);
+  const tagSlugs = aggregateTags(projects, publications).map((t) => t.slug);
+  return legacyRedirects(tagSlugs).map((redirect) => ({
+    params: { path: redirect.from.replace(/^\//, "").replace(/\/$/, "") },
+    props: { redirect },
+  }));
+}) satisfies GetStaticPaths;
+
+const { redirect } = Astro.props;
+const destination = new URL(redirect.to, site.url).href;
+---
+
+<!doctype html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex" />
+    <link rel="canonical" href={destination} />
+    <meta http-equiv="refresh" content={`0; url=${destination}`} />
+    <title>Redirecting…</title>
+    <script is:inline define:vars={{ destination }}>
+      location.replace(destination);
+    </script>
+  </head>
+  <body>
+    <p class="redirect-notice">
+      This page has moved. <a href={destination}>Continue to {redirect.to}</a>
+    </p>
+  </body>
+</html>

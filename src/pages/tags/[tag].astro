@@ -1,0 +1,57 @@
+---
+import type { GetStaticPaths } from "astro";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import ProjectCard from "../../components/ProjectCard.astro";
+import PublicationCard from "../../components/PublicationCard.astro";
+import {
+  getProjectsSorted,
+  getPublicationsSorted,
+  getAuthorsBySlug,
+  aggregateTags,
+} from "../../utils/content.ts";
+
+export const getStaticPaths = (async () => {
+  const [projects, publications] = await Promise.all([
+    getProjectsSorted(),
+    getPublicationsSorted(),
+  ]);
+  return aggregateTags(projects, publications).map((tag) => ({
+    params: { tag: tag.slug },
+    props: { tagName: tag.name },
+  }));
+}) satisfies GetStaticPaths;
+
+const { tagName } = Astro.props;
+
+const [projects, publications, authorsBySlug] = await Promise.all([
+  getProjectsSorted(),
+  getPublicationsSorted(),
+  getAuthorsBySlug(),
+]);
+const taggedPubs = publications.filter((p) => p.data.tags.includes(tagName));
+const taggedProjects = projects.filter((p) => p.data.tags.includes(tagName));
+---
+
+<BaseLayout title={tagName} description={`Content tagged "${tagName}".`}>
+  <section class="section">
+    <div class="container">
+      <h1 class="section-title">{tagName}</h1>
+      <div class="pub-list">
+        {
+          taggedPubs.map((publication) => (
+            <PublicationCard publication={publication} authorsBySlug={authorsBySlug} />
+          ))
+        }
+      </div>
+      {
+        taggedProjects.length > 0 && (
+          <div class="card-grid" style="margin-top: var(--space-6);">
+            {taggedProjects.map((project) => (
+              <ProjectCard project={project} />
+            ))}
+          </div>
+        )
+      }
+    </div>
+  </section>
+</BaseLayout>

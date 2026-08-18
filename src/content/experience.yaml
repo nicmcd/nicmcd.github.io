@@ -1,0 +1,42 @@
+- id: nvidia
+  order: 1
+  title: Senior Research Scientist
+  company: Nvidia
+  companyUrl: https://research.nvidia.com/
+  location: Salt Lake City, Utah
+  dateStart: "2021-02-01"
+  description: |-
+    I work in the network research group at Nvidia Research.
+
+- id: google
+  order: 2
+  title: Senior Software Engineer
+  company: Google
+  companyUrl: https://ai.google/research/teams/network-systems/
+  location: Sunnyvale, California
+  dateStart: "2019-01-01"
+  dateEnd: "2021-01-29"
+  description: |-
+    I worked in the system infrastructure team specifically on tightly-coupled high-performance network technologies covering topologies, routing algorithms, network acceleration and offloading, congestion control, processing architectures, and more.
+
+- id: hpe
+  order: 3
+  title: Research Scientist
+  company: Hewlett Packard Labs
+  companyUrl: https://www.labs.hpe.com
+  location: Fort Collins, Colorado
+  dateStart: "2016-01-01"
+  dateEnd: "2018-12-31"
+  description: |-
+    I was a lead architect on design of a new high-performance network designed for large-scale high-performance computing (HPC) systems and massively parallel memory-driven computing (MDC) systems. I was the key designer of the Gen-Z routing architectural specification. Using a data-driven simulation approach I guided the design of a novel multi-chip module (MCM) switch architecture that utilizes co-packaged integrated photonics.
+
+- id: l3
+  order: 4
+  title: Digital Hardware Design Engineer
+  company: L3 Communications
+  companyUrl: https://www2.l3t.com/csw/
+  location: Salt Lake City, Utah
+  dateStart: "2008-08-01"
+  dateEnd: "2012-09-01"
+  description: |-
+    Developed digital processing architectures for encryption, networking, and waveform data processing. Designed systems with strict requirements for high-performance, low-power, and low-area. All designs were meticulously scrutinized for high-reliability and signal integrity.

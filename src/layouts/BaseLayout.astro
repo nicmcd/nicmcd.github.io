@@ -1,0 +1,102 @@
+---
+import "@fontsource/b612-mono/400.css";
+import "@fontsource/b612-mono/700.css";
+import "@fontsource/orbitron/400.css";
+import "@fontsource/orbitron/700.css";
+import "../styles/global.css";
+
+import { site } from "../site.config.ts";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import SearchDialog from "../components/SearchDialog.astro";
+
+interface Props {
+  /** Page title; appended with the site title unless it already is the site title. */
+  title: string;
+  /** Meta description. */
+  description?: string;
+  /** Canonical path (defaults to current path). */
+  canonicalPath?: string;
+  /** Social image absolute URL path. */
+  image?: string;
+  /** Rendered page type for OG. */
+  ogType?: "website" | "article";
+  /** Add noindex robots meta (compatibility/redirect pages). */
+  noindex?: boolean;
+}
+
+const {
+  title,
+  description = site.description,
+  canonicalPath = Astro.url.pathname,
+  image,
+  ogType = "website",
+  noindex = false,
+} = Astro.props;
+
+const pageTitle = title === site.title ? title : `${title} | ${site.title}`;
+const canonicalUrl = new URL(canonicalPath, site.url).href;
+const imageUrl = image !== undefined ? new URL(image, site.url).href : undefined;
+---
+
+<!doctype html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="author" content={site.title} />
+    <meta name="description" content={description} />
+    <meta name="theme-color" content={site.themeColors.primary} />
+    {noindex && <meta name="robots" content="noindex" />}
+
+    <link rel="canonical" href={canonicalUrl} />
+    <link rel="manifest" href="/index.webmanifest" />
+    <link rel="icon" type="image/png" href="/img/icon-32.png" />
+    <link rel="apple-touch-icon" type="image/png" href="/img/icon-192.png" />
+    <link
+      rel="alternate"
+      type="application/rss+xml"
+      title={site.title}
+      href="/index.xml"
+    />
+
+    <meta property="og:site_name" content={site.title} />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content={ogType} />
+    <meta property="og:locale" content="en-us" />
+    {imageUrl !== undefined && <meta property="og:image" content={imageUrl} />}
+    <meta property="twitter:card" content="summary_large_image" />
+    {imageUrl !== undefined && <meta property="twitter:image" content={imageUrl} />}
+
+    <title>{pageTitle}</title>
+
+    {/* Theme initialization: runs before first paint to prevent a theme flash. */}
+    <script is:inline>
+      (function () {
+        var theme = null;
+        try {
+          theme = localStorage.getItem("theme");
+        } catch (e) {}
+        if (theme !== "light" && theme !== "dark") {
+          theme =
+            typeof matchMedia === "function" &&
+            matchMedia("(prefers-color-scheme: dark)").matches
+              ? "dark"
+              : "light";
+        }
+        document.documentElement.dataset.theme = theme;
+      })();
+    </script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main-content">Skip to main content</a>
+    <Header />
+    <main id="main-content">
+      <slot />
+    </main>
+    <Footer />
+    <SearchDialog />
+  </body>
+</html>

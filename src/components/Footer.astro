@@ -1,0 +1,20 @@
+---
+import { site } from "../site.config.ts";
+---
+
+<footer class="site-footer">
+  <div class="container">
+    <p>
+      &copy; <span data-footer-year>{new Date().getFullYear()}</span>
+      {site.title}
+    </p>
+  </div>
+</footer>
+
+<script>
+  // Keep the footer year current even when the page was built earlier.
+  const yearEl = document.querySelector("[data-footer-year]");
+  if (yearEl !== null) {
+    yearEl.textContent = String(new Date().getFullYear());
+  }
+</script>

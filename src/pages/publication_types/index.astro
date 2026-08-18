@@ -1,0 +1,25 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { getPublicationsSorted } from "../../utils/content.ts";
+import { publicationTypeLabel } from "../../utils/tags.ts";
+
+const publications = await getPublicationsSorted();
+const types = [...new Set(publications.map((p) => p.data.type))].sort();
+---
+
+<BaseLayout title="Publication Types" description="Publication types on this site.">
+  <section class="section">
+    <div class="container">
+      <h1 class="section-title">Publication Types</h1>
+      <ul class="tag-cloud">
+        {
+          types.map((type) => (
+            <li>
+              <a href={`/publication_types/${type}/`}>{publicationTypeLabel(type)}</a>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+</BaseLayout>

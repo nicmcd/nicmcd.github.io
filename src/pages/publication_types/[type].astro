@@ -1,0 +1,40 @@
+---
+import type { GetStaticPaths } from "astro";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import PublicationCard from "../../components/PublicationCard.astro";
+import { getPublicationsSorted, getAuthorsBySlug } from "../../utils/content.ts";
+import { publicationTypeLabel } from "../../utils/tags.ts";
+
+export const getStaticPaths = (async () => {
+  const publications = await getPublicationsSorted();
+  const types = [...new Set(publications.map((p) => p.data.type))];
+  return types.map((type) => ({
+    params: { type },
+    props: { type },
+  }));
+}) satisfies GetStaticPaths;
+
+const { type } = Astro.props;
+const label = publicationTypeLabel(type);
+
+const [publications, authorsBySlug] = await Promise.all([
+  getPublicationsSorted(),
+  getAuthorsBySlug(),
+]);
+const ofType = publications.filter((p) => p.data.type === type);
+---
+
+<BaseLayout title={label} description={`Publications of type "${label}".`}>
+  <section class="section">
+    <div class="container">
+      <h1 class="section-title">{label}</h1>
+      <div class="pub-list">
+        {
+          ofType.map((publication) => (
+            <PublicationCard publication={publication} authorsBySlug={authorsBySlug} />
+          ))
+        }
+      </div>
+    </div>
+  </section>
+</BaseLayout>

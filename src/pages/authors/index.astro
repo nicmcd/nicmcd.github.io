@@ -1,0 +1,25 @@
+---
+import { getCollection } from "astro:content";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+
+const authors = (await getCollection("authors")).sort((a, b) =>
+  a.data.name.localeCompare(b.data.name),
+);
+---
+
+<BaseLayout title="Authors" description="Authors of content on this site.">
+  <section class="section">
+    <div class="container">
+      <h1 class="section-title">Authors</h1>
+      <ul class="tag-cloud">
+        {
+          authors.map((author) => (
+            <li>
+              <a href={`/authors/${author.data.slug}/`}>{author.data.name}</a>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+</BaseLayout>

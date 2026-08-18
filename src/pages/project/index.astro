@@ -1,0 +1,18 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import ProjectCard from "../../components/ProjectCard.astro";
+import { getProjectsSorted } from "../../utils/content.ts";
+
+const projects = await getProjectsSorted();
+---
+
+<BaseLayout title="Projects" description="Projects by Nic McDonald.">
+  <section class="section">
+    <div class="container">
+      <h1 class="section-title">Projects</h1>
+      <div class="card-grid">
+        {projects.map((project) => <ProjectCard project={project} />)}
+      </div>
+    </div>
+  </section>
+</BaseLayout>
