@@ -16,6 +16,7 @@ const CANONICAL_ROUTES = [
   "/publication/hxrouting_sc/",
   "/publication/hyperx_sc/",
   "/publication/paragraph_icpp/",
+  "/publication/scaling/",
   "/publication/supersim_ispass/",
   "/tags/",
   "/tags/codesign/",
@@ -128,11 +129,11 @@ test.describe("canonical routes", () => {
     });
   }
 
-  test("exactly six projects and six publications exist", async ({ page }) => {
+  test("exactly six projects and seven publications exist", async ({ page }) => {
     const response = await page.request.get("/index.json");
     const docs = await response.json();
     expect(docs.filter((d: { kind: string }) => d.kind === "project")).toHaveLength(6);
-    expect(docs.filter((d: { kind: string }) => d.kind === "publication")).toHaveLength(6);
+    expect(docs.filter((d: { kind: string }) => d.kind === "publication")).toHaveLength(7);
   });
 });
 

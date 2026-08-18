@@ -22,6 +22,7 @@ const SEED_PAGES = [
   "/publication/hxrouting_sc/",
   "/publication/hyperx_sc/",
   "/publication/paragraph_icpp/",
+  "/publication/scaling/",
   "/publication/supersim_ispass/",
   "/tags/",
   "/tags/codesign/",
@@ -171,6 +172,7 @@ test.describe("link and asset crawl", () => {
       "/pubs/mikhailisaev_calculon_sc_2023.pdf",
       "/pubs/mikhailisaev_paragraph_icpp_2022.pdf",
       "/pubs/mikhailisaev_paragraph_icpp_2022_poster.pdf",
+      "/pubs/mikhailisaev_scaling_2023.pdf",
       "/pubs/nicmcdonald_supersim_ispass_2018.pdf",
       "/pubs/nicmcdonald_supersim_ispass_2018_slides.pdf",
       "/publication/calculon_sc/cite.bib",
@@ -178,6 +180,7 @@ test.describe("link and asset crawl", () => {
       "/publication/hxrouting_sc/cite.bib",
       "/publication/hyperx_sc/cite.bib",
       "/publication/paragraph_icpp/cite.bib",
+      "/publication/scaling/cite.bib",
       "/publication/supersim_ispass/cite.bib",
     ];
     for (const asset of assets) {

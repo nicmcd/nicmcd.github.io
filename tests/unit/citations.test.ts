@@ -10,6 +10,7 @@ describe("citation loading", () => {
       "hxrouting_sc",
       "hyperx_sc",
       "paragraph_icpp",
+      "scaling",
       "supersim_ispass",
     ]) {
       const bibPath = `publication/${slug}/cite.bib`;
@@ -32,6 +33,9 @@ describe("citation loading", () => {
       "@inproceedings",
     );
     expect(loadBibtex("publication/paragraph_icpp/cite.bib")).toContain(
+      "@inproceedings",
+    );
+    expect(loadBibtex("publication/scaling/cite.bib")).toContain(
       "@inproceedings",
     );
     expect(loadBibtex("publication/supersim_ispass/cite.bib")).toContain(
