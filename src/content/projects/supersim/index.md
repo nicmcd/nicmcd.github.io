@@ -12,4 +12,5 @@ image: ./featured.png
 imageAlt: SuperSim project featured image
 relatedPublications:
   - supersim_ispass
+  - hxrouting_sc
 ---

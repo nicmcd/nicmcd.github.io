@@ -18,7 +18,8 @@ tags:
 doi: 10.1145/3295500.3356151
 image: ./featured.png
 imageAlt: Practical and Efficient Incremental Adaptive Routing for HyperX Networks featured image
-projects: []
+projects:
+  - supersim
 pdf: pubs/nicmcdonald_hxrouting_sc_2019.pdf
 slides: pubs/nicmcdonald_hxrouting_sc_2019_slides.pdf
 bibPath: publication/hxrouting_sc/cite.bib
