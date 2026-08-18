@@ -115,6 +115,9 @@ Use the tokens; do not introduce hard-coded values in components.
 
 ### Add a project
 
+The `.agents/skills/add-proj` skill encodes the detailed workflow; the
+canonical steps are:
+
 1. Create `src/content/projects/<slug>/index.md` with frontmatter: `slug`,
    `title`, `summary`, `date` (ISO), `tags`, `externalUrl`, `image`,
    `imageAlt`, `relatedPublications`.
