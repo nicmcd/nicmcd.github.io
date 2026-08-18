@@ -1,12 +1,12 @@
 - id: nvidia
   order: 1
   title: Senior Research Scientist
-  company: Nvidia
+  company: NVIDIA
   companyUrl: https://research.nvidia.com/
   location: Salt Lake City, Utah
   dateStart: "2021-02-01"
   description: |-
-    I work in the network research group at Nvidia Research.
+    I work in the network research group at NVIDIA Research.
 
 - id: google
   order: 2

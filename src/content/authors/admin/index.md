@@ -4,7 +4,7 @@ name: Nic McDonald
 primary: true
 role: Software and Hardware Engineer
 organization:
-  name: Nvidia
+  name: NVIDIA
   url: https://research.nvidia.com
 bio: I am a computer architecture research scientist and software/hardware engineer.
 interests:
@@ -46,4 +46,4 @@ avatar: ./avatar.png
 avatarAlt: Portrait of Nic McDonald
 ---
 
-I am a computer architecture research scientist and software/hardware engineer. I am a senior research scientist at [Nvidia Research](https://research.nvidia.com) working on next generation hardware and software systems for Nvidia networks.
+I am a computer architecture research scientist and software/hardware engineer. I am a senior research scientist at [NVIDIA Research](https://research.nvidia.com) working on next generation hardware and software systems for NVIDIA networks.
