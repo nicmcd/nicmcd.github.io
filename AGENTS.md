@@ -124,17 +124,27 @@ Use the tokens; do not introduce hard-coded values in components.
 
 ### Add a publication
 
+The `.agents/skills/add-pub` skill encodes the detailed workflow; the
+canonical steps are:
+
 1. Create `src/content/publications/<slug>/index.md` with all required
    frontmatter (see content model above). `authors` must reference existing
    author slugs; add new authors first if needed.
-2. Add `featured.*` next to `index.md`.
+2. Add the featured image as `featured.*` next to `index.md`. Always ask the
+   user to provide the image, or propose one (e.g. a first-page render or a
+   relevant figure) and get explicit approval before using it. Set
+   `imageAlt` to describe what the image shows.
 3. Copy the PDF (and slides/poster, if any) to `public/pubs/` and set
    `pdf`/`slides`/`poster` to `pubs/<file>.pdf`.
 4. Add the BibTeX file at `public/publication/<slug>/cite.bib` and set
    `bibPath` to `publication/<slug>/cite.bib`.
 5. If it has a new type, extend `publicationTypeLabels` in
    `src/utils/tags.ts` and add the route; otherwise `type` is `"1"` or `"7"`.
-6. Run `npm run validate && npm run check && npm test && npm run build`.
+6. Update the hardcoded content inventories in the tests: canonical routes,
+   RSS feeds, and counts in `tests/e2e/routes.spec.ts`; seed pages and asset
+   lists in `tests/e2e/crawl.spec.ts`; document counts in
+   `tests/e2e/search.spec.ts`; slugs in `tests/unit/citations.test.ts`.
+7. Run `npm run validate && npm run check && npm test && npm run build`.
 
 ### Add an author
 

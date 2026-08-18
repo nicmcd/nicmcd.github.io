@@ -10,6 +10,13 @@ have a PDF and a BibTeX file; slides, poster, DOI, and project links are
 optional. Work interactively: gather everything from the user first, then
 create files, then validate.
 
+## Getting files from the user
+
+When the user gives you a URL for a file (paper PDF, slides, poster,
+featured image, ...) and the download fails (403, paywall, bot block, ...),
+do NOT search for alternative sources or mirrors. Stop and ask the user to
+download the file themselves and give you the local path.
+
 ## Step 1 — Gather information from the user
 
 Ask the user for each of the following. Propose sensible defaults and confirm
@@ -35,7 +42,9 @@ before writing anything.
 - **Abstract**: the full abstract text.
 - **Summary**: 1–2 sentence plain-language summary.
 - **Featured image**: ask for the source image file path; it will be copied
-  to `src/content/publications/<slug>/featured.<ext>`. Also ask for
+  to `src/content/publications/<slug>/featured.<ext>`. Alternatively propose
+  an image (e.g. a first-page render or a relevant figure) and get explicit
+  approval before using it — never pick one silently. Also ask for
   descriptive **alt text** (required).
 - **PDF**: ask for the source PDF file path. It will be copied to
   `public/pubs/` with the filename format
@@ -108,16 +117,22 @@ before writing anything.
    `src/content/projects/<project>/index.md` to add the new slug to
    `relatedPublications`.
 
+6. Update the hardcoded content inventories in the tests: canonical routes,
+   RSS feeds, and counts in `tests/e2e/routes.spec.ts`; seed pages and asset
+   lists in `tests/e2e/crawl.spec.ts`; document counts in
+   `tests/e2e/search.spec.ts`; slugs in `tests/unit/citations.test.ts`.
+
 ## Step 3 — Validate
 
-Run and ensure all pass with 0 errors:
+Run the full suite and ensure all steps pass:
 
 ```sh
-npm run validate && npm run check && npm test && npm run build
+npm run test:suite
 ```
 
-`npm run validate` checks cross-references (authors, projects), slug
-uniqueness, and that `pdf`/`slides`/`poster`/`bibPath` assets exist under
-`public/`.
+This runs validate, check, unit tests, build, and e2e with caching, so the
+pre-commit hook afterwards skips everything. `npm run validate` checks
+cross-references (authors, projects), slug uniqueness, and that
+`pdf`/`slides`/`poster`/`bibPath` assets exist under `public/`.
 Fix any reported errors and re-run until green. Do not commit anything unless
 the user asks.
