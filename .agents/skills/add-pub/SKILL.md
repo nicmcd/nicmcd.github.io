@@ -48,9 +48,13 @@ before writing anything.
   descriptive **alt text** (required).
 - **PDF**: ask for the source PDF file path. It will be copied to
   `public/pubs/` with the filename format
-  `<leadauthor>_<shortpapername>_<venue>_<year>.pdf` (lead author's surname,
-  lowercase, no separators; e.g. `nicmcdonald_supersim_ispass_2018.pdf`) —
-  propose the name and confirm with the user.
+  `<leadauthor>_<shortpapername>_<venue>_<year>.pdf`, where `<leadauthor>` is
+  the **first author's** given name + surname, lowercase, no separators
+  (e.g. `nicmcdonald_supersim_ispass_2018.pdf` for first author Nic McDonald,
+  `jensdomke_hyperx_sc_2019.pdf` for first author Jens Domke). The first
+  author is whoever is listed first on the paper — NOT necessarily the site
+  owner (`admin`). Derive the prefix from the actual first author in the
+  BibTeX/author list, propose the name, and confirm with the user.
 - **BibTeX**: ask the user to paste the BibTeX entry or give a file path. It
   will be written verbatim to `public/publication/<slug>/cite.bib`.
 
