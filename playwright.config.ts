@@ -5,6 +5,14 @@ import { defineConfig, devices } from "@playwright/test";
  * `astro preview`. Build first with `npm run build` (the webServer
  * command below builds when dist is missing).
  */
+
+/**
+ * Dedicated e2e port so the test server never collides with a local
+ * `astro dev` / `astro preview` server (default port 4321).
+ */
+const E2E_PORT = 4421;
+const E2E_URL = `http://localhost:${E2E_PORT}`;
+
 export default defineConfig({
   testDir: "./tests/e2e",
   globalTeardown: "./tests/e2e/global-teardown.ts",
@@ -14,7 +22,7 @@ export default defineConfig({
   workers: process.env.CI ? 2 : undefined,
   reporter: process.env.CI ? "github" : "list",
   use: {
-    baseURL: "http://localhost:4321",
+    baseURL: E2E_URL,
     trace: "retain-on-failure",
   },
   projects: [
@@ -34,9 +42,8 @@ export default defineConfig({
   webServer: {
     // `astro preview` daemonizes in Astro 7, so a foreground wrapper keeps
     // the process alive for Playwright and stops the daemon on shutdown.
-    command:
-      "npm run build && node --experimental-strip-types scripts/preview-foreground.ts",
-    url: "http://localhost:4321",
+    command: `npm run build && PORT=${E2E_PORT} node --experimental-strip-types scripts/preview-foreground.ts`,
+    url: E2E_URL,
     reuseExistingServer: !process.env.CI,
     timeout: 180_000,
   },

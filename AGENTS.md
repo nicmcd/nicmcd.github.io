@@ -21,7 +21,9 @@ from this repository via GitHub Actions.
 Note: in Astro 7, `astro preview` starts a background daemon and exits. Use
 `npx astro preview stop` to stop it. Playwright uses
 `scripts/preview-foreground.ts`, a foreground wrapper, plus a global teardown
-that stops the daemon.
+that stops the daemon. The e2e server runs on dedicated port 4421 (set via
+`E2E_PORT` in `playwright.config.ts`) so it never collides with a local
+dev/preview server on Astro's default port 4321.
 
 ## Content model
 

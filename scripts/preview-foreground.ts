@@ -9,7 +9,9 @@
  */
 import { spawn, spawnSync } from "node:child_process";
 
-const PORT = process.env.PORT ?? "4321";
+// Defaults to the dedicated e2e port (4421), keeping clear of dev/preview
+// servers on Astro's default port 4321. Playwright sets PORT explicitly.
+const PORT = process.env.PORT ?? "4421";
 const URL = `http://localhost:${PORT}/`;
 const START_TIMEOUT_MS = 60_000;
 
