@@ -94,7 +94,12 @@ const { Content } = hasBody ? await render(author) : { Content: null };
                 <h2>Interests</h2>
                 <ul class="interests-list">
                   {profile.interests.map((interest) => (
-                    <li>{interest}</li>
+                    <li>
+                      <span class="interest-icon">
+                        <Icon name="lightbulb" size={20} />
+                      </span>
+                      {interest}
+                    </li>
                   ))}
                 </ul>
               </>

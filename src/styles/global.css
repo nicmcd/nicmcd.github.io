@@ -541,7 +541,17 @@ main {
 }
 
 .interests-list li {
-  padding: var(--space-1) 0;
+  display: flex;
+  gap: var(--space-3);
+  align-items: baseline;
+  padding: var(--space-2) 0;
+}
+
+.interests-list .interest-icon {
+  color: var(--color-primary);
+  flex-shrink: 0;
+  position: relative;
+  top: 0.2em;
 }
 
 .education-list li {

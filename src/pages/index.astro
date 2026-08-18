@@ -89,7 +89,16 @@ const profile = admin.data;
 
           <h3>Interests</h3>
           <ul class="interests-list">
-            {profile.interests.map((interest) => <li>{interest}</li>)}
+            {
+              profile.interests.map((interest) => (
+                <li>
+                  <span class="interest-icon">
+                    <Icon name="lightbulb" size={20} />
+                  </span>
+                  {interest}
+                </li>
+              ))
+            }
           </ul>
 
           <h3>Education</h3>
