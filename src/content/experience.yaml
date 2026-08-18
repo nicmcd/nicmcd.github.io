@@ -6,7 +6,7 @@
   location: Salt Lake City, Utah
   dateStart: "2021-02-01"
   description: |-
-    I work in the network research group at NVIDIA Research.
+    At NVIDIA Research, I work on AI system architecture. I study how accelerator design, memory hierarchy, and interconnect shape the performance and efficiency of modern language-model workloads. I build models and simulation tools to explore hardware/software trade-offs, evaluate new inference system designs, and investigate architectures for agentic AI and small language models. My work sits at the intersection of computer architecture, networking, and machine learning systems, with a focus on turning research ideas into practical directions for future AI platforms.
 
 - id: google
   order: 2
