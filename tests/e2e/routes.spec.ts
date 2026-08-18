@@ -12,6 +12,7 @@ const CANONICAL_ROUTES = [
   "/publication/",
   "/publication/hpsoc_thesis/",
   "/publication/hxrouting_sc/",
+  "/publication/hyperx_sc/",
   "/publication/supersim_ispass/",
   "/tags/",
   "/tags/cpp/",
@@ -25,11 +26,20 @@ const CANONICAL_ROUTES = [
   "/authors/",
   "/authors/admin/",
   "/authors/adriana-flores/",
+  "/authors/akihiro-nomura/",
   "/authors/al-davis/",
   "/authors/bill-dally/",
+  "/authors/dennis-floyd/",
   "/authors/doug-gibson/",
+  "/authors/ivan-ivanov/",
+  "/authors/jens-domke/",
   "/authors/john-kim/",
   "/authors/mikhail-isaev/",
+  "/authors/nicolas-dube/",
+  "/authors/satoshi-matsuoka/",
+  "/authors/shinichi-miura/",
+  "/authors/tomoya-yuki/",
+  "/authors/yuki-tsushima/",
   "/publication_types/",
   "/publication_types/1/",
   "/publication_types/7/",
@@ -51,11 +61,20 @@ const RSS_FEEDS = [
   "/authors/index.xml",
   "/authors/admin/index.xml",
   "/authors/adriana-flores/index.xml",
+  "/authors/akihiro-nomura/index.xml",
   "/authors/al-davis/index.xml",
   "/authors/bill-dally/index.xml",
+  "/authors/dennis-floyd/index.xml",
   "/authors/doug-gibson/index.xml",
+  "/authors/ivan-ivanov/index.xml",
+  "/authors/jens-domke/index.xml",
   "/authors/john-kim/index.xml",
   "/authors/mikhail-isaev/index.xml",
+  "/authors/nicolas-dube/index.xml",
+  "/authors/satoshi-matsuoka/index.xml",
+  "/authors/shinichi-miura/index.xml",
+  "/authors/tomoya-yuki/index.xml",
+  "/authors/yuki-tsushima/index.xml",
   "/publication_types/index.xml",
   "/publication_types/1/index.xml",
   "/publication_types/7/index.xml",
@@ -94,11 +113,11 @@ test.describe("canonical routes", () => {
     });
   }
 
-  test("exactly five projects and three publications exist", async ({ page }) => {
+  test("exactly five projects and four publications exist", async ({ page }) => {
     const response = await page.request.get("/index.json");
     const docs = await response.json();
     expect(docs.filter((d: { kind: string }) => d.kind === "project")).toHaveLength(5);
-    expect(docs.filter((d: { kind: string }) => d.kind === "publication")).toHaveLength(3);
+    expect(docs.filter((d: { kind: string }) => d.kind === "publication")).toHaveLength(4);
   });
 });
 

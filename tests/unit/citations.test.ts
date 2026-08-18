@@ -4,7 +4,12 @@ import { loadBibtex } from "../../src/utils/citations.ts";
 
 describe("citation loading", () => {
   it("loads the verbatim BibTeX for each publication", () => {
-    for (const slug of ["hpsoc_thesis", "hxrouting_sc", "supersim_ispass"]) {
+    for (const slug of [
+      "hpsoc_thesis",
+      "hxrouting_sc",
+      "hyperx_sc",
+      "supersim_ispass",
+    ]) {
       const bibPath = `publication/${slug}/cite.bib`;
       const fromUtil = loadBibtex(bibPath);
       const verbatim = readFileSync(`public/${bibPath}`, "utf8");
@@ -16,6 +21,9 @@ describe("citation loading", () => {
   it("loads expected BibTeX entry types", () => {
     expect(loadBibtex("publication/hpsoc_thesis/cite.bib")).toContain("@phdthesis");
     expect(loadBibtex("publication/hxrouting_sc/cite.bib")).toContain(
+      "@inproceedings",
+    );
+    expect(loadBibtex("publication/hyperx_sc/cite.bib")).toContain(
       "@inproceedings",
     );
     expect(loadBibtex("publication/supersim_ispass/cite.bib")).toContain(
