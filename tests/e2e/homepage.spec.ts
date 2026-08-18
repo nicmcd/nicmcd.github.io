@@ -71,7 +71,7 @@ test.describe("homepage", () => {
       "Digital Hardware Design Engineer",
     ]) {
       await expect(
-        experience.getByRole("heading", { name: role }),
+        experience.getByRole("heading", { name: role, exact: true }),
       ).toBeVisible();
     }
     await expect(experience.getByText("Present")).toBeVisible();

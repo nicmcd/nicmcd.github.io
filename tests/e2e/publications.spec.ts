@@ -117,7 +117,7 @@ test.describe("publication detail pages", () => {
       "href",
       /^mailto:/,
     );
-    for (const name of ["X (Twitter)", "Facebook", "LinkedIn", "WhatsApp", "Weibo"]) {
+    for (const name of ["X \\(Twitter\\)", "Facebook", "LinkedIn", "WhatsApp", "Weibo"]) {
       const link = share.getByRole("link", { name: new RegExp(name) });
       await expect(link).toHaveAttribute("target", "_blank");
       await expect(link).toHaveAttribute("rel", /noopener/);

@@ -1,7 +1,8 @@
 import { test, expect } from "@playwright/test";
 
 test.describe("navigation", () => {
-  test("desktop nav shows all links and navigates by anchor", async ({ page }) => {
+  test("desktop nav shows all links and navigates by anchor", async ({ page }, testInfo) => {
+    test.skip(testInfo.project.name !== "desktop-1440", "desktop only");
     await page.goto("/");
     const nav = page.locator("#site-nav");
     await expect(nav).toBeVisible();
@@ -15,7 +16,8 @@ test.describe("navigation", () => {
     await expect(page.locator("#projects")).toBeInViewport();
   });
 
-  test("CV link points at the preserved PDF", async ({ page }) => {
+  test("CV link points at the preserved PDF", async ({ page }, testInfo) => {
+    test.skip(testInfo.project.name !== "desktop-1440", "desktop only");
     await page.goto("/");
     const cv = page.locator("#site-nav").getByRole("link", { name: "CV" });
     await expect(cv).toHaveAttribute("href", "/pubs/nicmcdonald_cv.pdf");

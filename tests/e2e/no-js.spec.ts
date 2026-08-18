@@ -1,7 +1,7 @@
 import { test, expect } from "@playwright/test";
 
 test.describe("no-JavaScript rendering", () => {
-  test("all essential homepage content is visible without JavaScript", async ({ browser }) => {
+  test("all essential homepage content is visible without JavaScript", async ({ browser }, testInfo) => {
     const context = await browser.newContext({ javaScriptEnabled: false });
     const page = await context.newPage();
     await page.goto("/");
@@ -29,8 +29,11 @@ test.describe("no-JavaScript rendering", () => {
       page.getByRole("link", { name: "n.mcdonald83@gmail.com" }),
     ).toBeVisible();
 
-    // Navigation is visible without JS at desktop width.
-    await expect(page.locator("#site-nav")).toBeVisible();
+    // Navigation is visible without JS at desktop width (on smaller
+    // viewports the nav lives behind the JS-driven disclosure toggle).
+    if (testInfo.project.name === "desktop-1440") {
+      await expect(page.locator("#site-nav")).toBeVisible();
+    }
 
     await context.close();
   });

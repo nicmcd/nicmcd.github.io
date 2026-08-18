@@ -1,4 +1,5 @@
 import { test, expect } from "@playwright/test";
+import { readFileSync } from "node:fs";
 
 const CANONICAL_ROUTES = [
   "/",
@@ -118,11 +119,12 @@ test.describe("taxonomy pages", () => {
     await expect(
       page.getByRole("heading", { name: "John Kim" }),
     ).toBeVisible();
+    // Each publication title links twice: the "Latest" list and the cards.
     await expect(
-      page.getByRole("link", { name: /Practical and Efficient Incremental/ }),
+      page.getByRole("link", { name: /Practical and Efficient Incremental/ }).first(),
     ).toBeVisible();
     await expect(
-      page.getByRole("link", { name: /SuperSim: Extensible/ }),
+      page.getByRole("link", { name: /SuperSim: Extensible/ }).first(),
     ).toBeVisible();
   });
 
@@ -179,10 +181,11 @@ test.describe("feeds and metadata routes", () => {
     await expect(page.getByRole("heading", { name: /404/ })).toBeVisible();
   });
 
-  test("CNAME and favicon assets exist", async ({ page }) => {
-    const cname = await page.request.get("/CNAME");
-    expect(cname.ok()).toBe(true);
-    expect((await cname.text()).trim()).toBe("www.nicm.dev");
+  test("CNAME and favicon assets exist", async () => {
+    // CNAME is a GitHub Pages deployment artifact, not a site route. The
+    // local preview server 404s extensionless paths because
+    // `trailingSlash: "always"`, so verify the build output on disk.
+    expect(readFileSync("dist/CNAME", "utf8").trim()).toBe("www.nicm.dev");
   });
 });
 
@@ -200,16 +203,17 @@ test.describe("compatibility redirects", () => {
     });
   }
 
-  test("redirect pages are no-index with a visible fallback", async ({ browser }) => {
-    const context = await browser.newContext({ javaScriptEnabled: false });
-    const page = await context.newPage();
-    await page.goto("/publication/incadr_sc/");
-    const html = await page.content();
+  test("redirect pages are no-index with a visible fallback", async ({ page }) => {
+    // Fetch the raw HTML instead of browsing: the meta refresh navigates
+    // even with JavaScript disabled, racing any DOM assertions.
+    const response = await page.request.get("/publication/incadr_sc/");
+    expect(response.ok()).toBe(true);
+    const html = await response.text();
     expect(html).toContain("noindex");
     expect(html).toContain('http-equiv="refresh"');
-    await expect(
-      page.getByRole("link", { name: /Continue to/ }),
-    ).toHaveAttribute("href", "https://www.nicm.dev/publication/hxrouting_sc/");
-    await context.close();
+    expect(html).toContain("Continue to");
+    expect(html).toContain(
+      'href="https://www.nicm.dev/publication/hxrouting_sc/"',
+    );
   });
 });
