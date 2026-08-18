@@ -5,6 +5,7 @@ import { loadBibtex } from "../../src/utils/citations.ts";
 describe("citation loading", () => {
   it("loads the verbatim BibTeX for each publication", () => {
     for (const slug of [
+      "calculon_sc",
       "hpsoc_thesis",
       "hxrouting_sc",
       "hyperx_sc",
@@ -20,6 +21,9 @@ describe("citation loading", () => {
   });
 
   it("loads expected BibTeX entry types", () => {
+    expect(loadBibtex("publication/calculon_sc/cite.bib")).toContain(
+      "@inproceedings",
+    );
     expect(loadBibtex("publication/hpsoc_thesis/cite.bib")).toContain("@phdthesis");
     expect(loadBibtex("publication/hxrouting_sc/cite.bib")).toContain(
       "@inproceedings",

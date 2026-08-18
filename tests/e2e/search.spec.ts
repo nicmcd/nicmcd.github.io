@@ -37,7 +37,7 @@ test.describe("search dialog", () => {
 
     await page.locator("[data-search-input]").fill("isaev");
     await expect(page.locator(".search-result-link").first()).toContainText(
-      "ParaGraph: An application-simulator interface",
+      "Calculon: a Methodology and Tool",
     );
 
     await page.locator("[data-search-input]").fill("Task Management");
@@ -70,11 +70,11 @@ test.describe("search dialog", () => {
     await expect(page.locator(".search-result-link")).toHaveCount(0);
   });
 
-  test("indexes exactly the profile, five projects, and five publications", async ({ page }) => {
+  test("indexes exactly the profile, five projects, and six publications", async ({ page }) => {
     const response = await page.request.get("/index.json");
     expect(response.ok()).toBe(true);
     const docs = await response.json();
-    expect(docs).toHaveLength(11);
+    expect(docs).toHaveLength(12);
     const kinds = docs.map((d: { kind: string }) => d.kind).sort();
     expect(kinds).toEqual([
       "profile",
@@ -83,6 +83,7 @@ test.describe("search dialog", () => {
       "project",
       "project",
       "project",
+      "publication",
       "publication",
       "publication",
       "publication",
