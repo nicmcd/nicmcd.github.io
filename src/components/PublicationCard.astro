@@ -83,6 +83,20 @@ const pubUrl = `/publication/${pub.slug}/`;
         )
       }
       {
+        pub.video !== undefined && (
+          <a
+            class="btn-outline"
+            href={pub.video}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Video (external link)"
+          >
+            <Icon name="video" size={16} />
+            Video
+          </a>
+        )
+      }
+      {
         pub.doi !== "" && (
           <a
             class="btn-outline"

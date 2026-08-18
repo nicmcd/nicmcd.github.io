@@ -45,9 +45,10 @@ handling.
 - `publications` (`src/content/publications/<slug>/index.md` + `featured.*`):
   `slug`, `title`, `authors[]` (author slugs), `date`, `type` (`"1"` =
   conference paper, `"7"` = thesis), `venue`, `venueShort`, `abstract`,
-  `summary`, `tags[]`, `doi`, `image`, `imageAlt`, `projects[]` (project
+  `summary`,   `tags[]`, `doi`, `image`, `imageAlt`, `projects[]` (project
   slugs), `pdf` (`pubs/....pdf`), optional `slides` and `poster`
-  (`pubs/....pdf`), `bibPath` (`publication/<slug>/cite.bib`).
+  (`pubs/....pdf`), optional `video` (external URL),
+  `bibPath` (`publication/<slug>/cite.bib`).
 - `experience` (`src/content/experience.yaml`): `order` (explicit display
   order), `title`, `company`, `companyUrl`, `location`, `dateStart`,
   optional `dateEnd`, verbatim `description`.

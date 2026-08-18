@@ -62,6 +62,21 @@ test.describe("publication detail pages", () => {
     }
   });
 
+  test("paragraph publication links its poster and external video", async ({ page }) => {
+    await page.goto("/publication/paragraph_icpp/");
+    await expect(page.getByRole("link", { name: "Poster", exact: true })).toHaveAttribute(
+      "href",
+      "/pubs/mikhailisaev_paragraph_icpp_2022_poster.pdf",
+    );
+    const video = page.getByRole("link", { name: /Video/ });
+    await expect(video).toHaveAttribute(
+      "href",
+      "https://www.youtube.com/watch?v=qo6EqRqB1XM",
+    );
+    await expect(video).toHaveAttribute("target", "_blank");
+    await expect(video).toHaveAttribute("rel", /noopener/);
+  });
+
   test("supersim publication keeps its Project link", async ({ page }) => {
     await page.goto("/publication/supersim_ispass/");
     await expect(page.getByRole("link", { name: "Project", exact: true })).toHaveAttribute(

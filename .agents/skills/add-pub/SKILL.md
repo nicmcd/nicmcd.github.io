@@ -6,8 +6,8 @@ description: Use when the user wants to add a new publication (conference paper,
 # Add a publication
 
 Publications are validated Astro content entries. Every publication **must**
-have a PDF and a BibTeX file; slides, poster, DOI, and project links are
-optional. Work interactively: gather everything from the user first, then
+have a PDF and a BibTeX file; slides, poster, video, DOI, and project links
+are optional. Work interactively: gather everything from the user first, then
 create files, then validate.
 
 ## Getting files from the user
@@ -66,6 +66,9 @@ before writing anything.
 - **Poster PDF**: source file path; same naming as slides but with a
   `_poster` suffix:
   `<leadauthor>_<shortpapername>_<venue>_<year>_poster.pdf`.
+- **Video**: a URL linking to a video of the talk or presentation (e.g. a
+  YouTube recording). Set as `video:` in the frontmatter; it renders as an
+  external "Video" button next to the PDF/Slides/Poster buttons.
 - **DOI**: bare DOI string, e.g. `10.1109/ISPASS.2018.00017` (`""` if none).
 - **venueShort**: short form, e.g. `In *ISPASS 2018*` (`""` if none).
 - **Tags**: display tags, e.g. `Simulation`, `Networks`.
@@ -97,15 +100,16 @@ before writing anything.
    image: ./featured.<ext>
    imageAlt: <descriptive alt text>
    projects: []         # or list of project slugs
-   pdf: pubs/<pdf-file>.pdf
-   slides: pubs/<slides-file>.pdf   # omit this line entirely if no slides
-   poster: pubs/<poster-file>.pdf   # omit this line entirely if no poster
-   bibPath: publication/<slug>/cite.bib
+    pdf: pubs/<pdf-file>.pdf
+    slides: pubs/<slides-file>.pdf   # omit this line entirely if no slides
+    poster: pubs/<poster-file>.pdf   # omit this line entirely if no poster
+    video: <video-url>               # omit this line entirely if no video
+    bibPath: publication/<slug>/cite.bib
    ---
    ```
 
-   Note: `slides` and `poster` are optional in the schema — omit each key
-   when absent. `doi` and `venueShort` use `""` when absent. Match the
+    Note: `slides`, `poster`, and `video` are optional in the schema — omit
+    each key when absent. `doi` and `venueShort` use `""` when absent. Match the
    formatting of existing entries (see
    `src/content/publications/supersim_ispass/index.md`).
 

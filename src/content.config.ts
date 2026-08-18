@@ -89,6 +89,7 @@ const publications = defineCollection({
       pdf: z.string().regex(/^pubs\/.+\.pdf$/),
       slides: z.string().regex(/^pubs\/.+\.pdf$/).optional(),
       poster: z.string().regex(/^pubs\/.+\.pdf$/).optional(),
+      video: z.url().optional(),
       bibPath: z.string().regex(/^publication\/.+\/cite\.bib$/),
     }),
 });

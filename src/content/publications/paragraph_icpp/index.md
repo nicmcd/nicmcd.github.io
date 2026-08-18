@@ -22,5 +22,6 @@ imageAlt: ParaGraph organization diagram showing the bridge from a high-level co
 projects: []
 pdf: pubs/mikhailisaev_paragraph_icpp_2022.pdf
 poster: pubs/mikhailisaev_paragraph_icpp_2022_poster.pdf
+video: https://www.youtube.com/watch?v=qo6EqRqB1XM
 bibPath: publication/paragraph_icpp/cite.bib
 ---
