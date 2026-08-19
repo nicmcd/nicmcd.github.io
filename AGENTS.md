@@ -18,6 +18,7 @@ from this repository via GitHub Actions.
 | `npm run test:e2e`   | Playwright e2e suite against a production build.               |
 | `npm run test:suite` | Full suite (validate, check, test, build, e2e) with caching.   |
 | `npm run screenshots`| Regenerate the local reference screenshots (git-ignored).      |
+| `npm run check:links`| Build, then verify all internal and external links in `dist/`. |
 
 Note: in Astro 7, `astro preview` starts a background daemon and exits. Use
 `npx astro preview stop` to stop it. Playwright uses
@@ -216,6 +217,12 @@ canonical steps are:
   artifacts regenerated with `npm run screenshots` (which sets
   `UPDATE_SCREENSHOTS=1`); regular e2e runs skip capture so they never
   rewrite the PNGs. Regenerate them when the design intentionally changes.
+- `npm run check:links` (`scripts/check-links.ts`) crawls the built site
+  and verifies every internal and external link. It is a manual tool,
+  intentionally excluded from CI, `test:suite`, and the pre-commit hook:
+  external sites rate-limit and bot-block automated requests, so only hard
+  failures (404/410) fail the run while other non-OK responses are
+  reported as unverifiable warnings to check by hand.
 
 ## Git hooks
 

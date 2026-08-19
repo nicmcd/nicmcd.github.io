@@ -7,7 +7,7 @@ tags:
   - Simulation
   - Networks
 date: "2013-05-01T00:00:00Z"
-externalUrl: https://github.com/nicmcd/supersim
+externalUrl: https://github.com/ssnetsim/supersim
 image: ./featured.png
 imageAlt: SuperSim project featured graphic
 relatedPublications:
