@@ -1,8 +1,8 @@
 /**
  * Search index at /index.json.
  *
- * Indexes exactly the primary profile, the five projects, and the three
- * publications with title, summary, tags, and authors.
+ * Indexes the primary profile, the projects, the publications, and the
+ * patents with title, summary, tags, and authors.
  */
 
 import type { APIRoute } from "astro";
@@ -10,18 +10,21 @@ import {
   getProjectsSorted,
   getPublicationsSorted,
   getPrimaryAuthor,
+  getPatentsSorted,
   authorNames,
   getAuthorsBySlug,
 } from "../utils/content.ts";
 import type { SearchDocument } from "../utils/search.ts";
 
 export const GET: APIRoute = async () => {
-  const [projects, publications, profile, authorsBySlug] = await Promise.all([
-    getProjectsSorted(),
-    getPublicationsSorted(),
-    getPrimaryAuthor(),
-    getAuthorsBySlug(),
-  ]);
+  const [projects, publications, profile, authorsBySlug, patents] =
+    await Promise.all([
+      getProjectsSorted(),
+      getPublicationsSorted(),
+      getPrimaryAuthor(),
+      getAuthorsBySlug(),
+      getPatentsSorted(),
+    ]);
 
   const documents: SearchDocument[] = [
     {
@@ -50,6 +53,19 @@ export const GET: APIRoute = async () => {
         summary: pub.data.summary,
         tags: pub.data.tags,
         authors: authorNames(pub, authorsBySlug).map((a) => a.name),
+      };
+    }),
+    ...patents.map((patent): SearchDocument => {
+      return {
+        url: "/#patents",
+        kind: "patent",
+        title: patent.data.title,
+        summary:
+          `${patent.data.patentNumber} · ` +
+          `${patent.data.status === "granted" ? "Granted" : "Pending"} · ` +
+          patent.data.assignee,
+        tags: [],
+        authors: [profile.data.name],
       };
     }),
   ];

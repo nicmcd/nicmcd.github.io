@@ -17,12 +17,16 @@ test.describe("no-JavaScript rendering", () => {
       await expect(card).toBeVisible();
     }
 
-    // Publications, experience, topics, contact
+    // Publications, experience, patents, topics, contact
     await expect(
       page.getByRole("link", { name: /Practical and Efficient Incremental/ }),
     ).toBeVisible();
     await expect(
       page.getByRole("heading", { name: "Senior Research Scientist" }),
+    ).toBeVisible();
+    await expect(page.locator("#patents .patent-item")).toHaveCount(22);
+    await expect(
+      page.getByRole("link", { name: /Rate update engine/ }),
     ).toBeVisible();
     await expect(page.locator("#tags .tag-cloud a").first()).toBeVisible();
     await expect(

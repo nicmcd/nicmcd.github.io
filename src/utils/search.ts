@@ -10,7 +10,7 @@
 export interface SearchDocument {
   /** Result URL. */
   url: string;
-  /** Document kind: "profile" | "project" | "publication". */
+  /** Document kind: "profile" | "project" | "publication" | "patent". */
   kind: string;
   title: string;
   summary: string;

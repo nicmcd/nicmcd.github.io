@@ -1,0 +1,175 @@
+- id: us9847949
+  title: Arbitrating data packets
+  patentNumber: US9847949B2
+  url: https://patents.google.com/patent/US9847949B2/en
+  date: "2017-12-19"
+  status: granted
+  assignee: Hewlett Packard Enterprise
+
+- id: us20180316599
+  title: Routing packets considering the propagation delay of routes
+  patentNumber: US20180316599A1
+  url: https://patents.google.com/patent/US20180316599A1/en
+  date: "2018-11-01"
+  status: pending
+  assignee: Hewlett Packard Enterprise
+
+- id: us10355978
+  title: Calculating times to live for transaction requests
+  patentNumber: US10355978B2
+  url: https://patents.google.com/patent/US10355978B2/en
+  date: "2019-07-16"
+  status: granted
+  assignee: Hewlett Packard Enterprise
+
+- id: us10374943
+  title: Routing packets in dimensional order in multidimensional networks
+  patentNumber: US10374943B2
+  url: https://patents.google.com/patent/US10374943B2/en
+  date: "2019-08-06"
+  status: granted
+  assignee: Hewlett Packard Enterprise
+
+- id: us10404575
+  title: Switching device having ports that utilize independently sized buffering queues
+  patentNumber: US10404575B2
+  url: https://patents.google.com/patent/US10404575B2/en
+  date: "2019-09-03"
+  status: granted
+  assignee: Hewlett Packard Enterprise
+
+- id: us10476780
+  title: Routing packets based on congestion of minimal and non-minimal routes
+  patentNumber: US10476780B2
+  url: https://patents.google.com/patent/US10476780B2/en
+  date: "2019-11-12"
+  status: granted
+  assignee: Hewlett Packard Enterprise
+
+- id: us10491545
+  title: Virtual channel routing
+  patentNumber: US10491545B2
+  url: https://patents.google.com/patent/US10491545B2/en
+  date: "2019-11-26"
+  status: granted
+  assignee: Hewlett Packard Enterprise
+
+- id: us10498631
+  title: Routing packets using distance classes
+  patentNumber: US10498631B2
+  url: https://patents.google.com/patent/US10498631B2/en
+  date: "2019-12-03"
+  status: granted
+  assignee: Hewlett Packard Enterprise
+
+- id: us20200076742
+  title: Sending data using a plurality of credit pools at the receivers
+  patentNumber: US20200076742A1
+  url: https://patents.google.com/patent/US20200076742A1/en
+  date: "2020-03-05"
+  status: pending
+  assignee: Hewlett Packard Enterprise
+
+- id: us10693808
+  title: Request arbitration by age and traffic classes
+  patentNumber: US10693808B2
+  url: https://patents.google.com/patent/US10693808B2/en
+  date: "2020-06-23"
+  status: granted
+  assignee: Hewlett Packard Enterprise
+
+- id: us10757038
+  title: Reservation-based switching devices
+  patentNumber: US10757038B2
+  url: https://patents.google.com/patent/US10757038B2/en
+  date: "2020-08-25"
+  status: granted
+  assignee: Hewlett Packard Enterprise
+
+- id: us10887217
+  title: Routing packets based on congestion metric thresholds and weights
+  patentNumber: US10887217B2
+  url: https://patents.google.com/patent/US10887217B2/en
+  date: "2021-01-05"
+  status: granted
+  assignee: Hewlett Packard Enterprise
+
+- id: us10929322
+  title: Prioritized arbitration using fixed priority arbiter
+  patentNumber: US10929322B2
+  url: https://patents.google.com/patent/US10929322B2/en
+  date: "2021-02-23"
+  status: granted
+  assignee: Hewlett Packard Enterprise
+
+- id: us10938751
+  title: Hierarchical switching devices
+  patentNumber: US10938751B2
+  url: https://patents.google.com/patent/US10938751B2/en
+  date: "2021-03-02"
+  status: granted
+  assignee: Hewlett Packard Enterprise
+
+- id: us10972394
+  title: Network congestion management
+  patentNumber: US10972394B2
+  url: https://patents.google.com/patent/US10972394B2/en
+  date: "2021-04-06"
+  status: granted
+  assignee: Hewlett Packard Enterprise
+
+- id: us11178046
+  title: Weighted bandwidth allocation for adaptive routing
+  patentNumber: US11178046B2
+  url: https://patents.google.com/patent/US11178046B2/en
+  date: "2021-11-16"
+  status: granted
+  assignee: Google
+
+- id: us11197152
+  title: Utilization of component group tables in a computing network
+  patentNumber: US11197152B2
+  url: https://patents.google.com/patent/US11197152B2/en
+  date: "2021-12-07"
+  status: granted
+  assignee: Hewlett Packard Enterprise
+
+- id: us11558682
+  title: Hot-swappable no cable touch switch enclosure
+  patentNumber: US11558682B2
+  url: https://patents.google.com/patent/US11558682B2/en
+  date: "2023-01-17"
+  status: granted
+  assignee: Hewlett Packard Enterprise
+
+- id: us11601368
+  title: Predictive congestion detection
+  patentNumber: US11601368B2
+  url: https://patents.google.com/patent/US11601368B2/en
+  date: "2023-03-07"
+  status: granted
+  assignee: Hewlett Packard Enterprise
+
+- id: us11722406
+  title: Route selection based on buffer congestion
+  patentNumber: US11722406B2
+  url: https://patents.google.com/patent/US11722406B2/en
+  date: "2023-08-08"
+  status: granted
+  assignee: Hewlett Packard Enterprise
+
+- id: us11855913
+  title: Hierarchical switching device with deadlockable storage and storage partitions
+  patentNumber: US11855913B2
+  url: https://patents.google.com/patent/US11855913B2/en
+  date: "2023-12-26"
+  status: granted
+  assignee: Hewlett Packard Enterprise
+
+- id: us11979330
+  title: Rate update engine for reliable transport protocol
+  patentNumber: US11979330B2
+  url: https://patents.google.com/patent/US11979330B2/en
+  date: "2024-05-07"
+  status: granted
+  assignee: Google

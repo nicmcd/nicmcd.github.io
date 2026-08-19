@@ -53,6 +53,9 @@ export function readContentForValidation(
   const experience = parseYaml(
     readFileSync(join(contentDir, "experience.yaml"), "utf8"),
   ) as Record<string, unknown>[];
+  const patents = parseYaml(
+    readFileSync(join(contentDir, "patents.yaml"), "utf8"),
+  ) as Record<string, unknown>[];
 
   return {
     authors: authors.map((a) => ({
@@ -79,6 +82,12 @@ export function readContentForValidation(
       title: String(e.title),
       dateStart: toDate(e.dateStart) ?? new Date(Number.NaN),
       dateEnd: toDate(e.dateEnd),
+    })),
+    patents: patents.map((p) => ({
+      id: String(p.id),
+      title: String(p.title),
+      patentNumber: String(p.patentNumber),
+      date: toDate(p.date) ?? new Date(Number.NaN),
     })),
     publicDir,
   };

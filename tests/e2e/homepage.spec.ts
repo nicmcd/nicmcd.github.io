@@ -9,7 +9,7 @@ const EXPECTED_FILTERS: Record<string, string[]> = {
 };
 
 test.describe("homepage", () => {
-  test("renders all six sections in order", async ({ page }) => {
+  test("renders all seven sections in order", async ({ page }) => {
     await page.goto("/");
     const ids = await page.locator("main section[id]").evaluateAll((els) =>
       els.map((el) => el.id),
@@ -19,6 +19,7 @@ test.describe("homepage", () => {
       "projects",
       "publications",
       "experience",
+      "patents",
       "tags",
       "contact",
     ]);
@@ -75,6 +76,24 @@ test.describe("homepage", () => {
       ).toBeVisible();
     }
     await expect(experience.getByText("Present")).toBeVisible();
+  });
+
+  test("patents section lists all 22 patents with status and external links", async ({ page }) => {
+    await page.goto("/");
+    const patents = page.locator("#patents");
+    await expect(
+      patents.getByRole("heading", { name: "Patents", exact: true }),
+    ).toBeVisible();
+    const items = patents.locator(".patent-item");
+    await expect(items).toHaveCount(22);
+    await expect(patents.locator(".tag", { hasText: "Granted" })).toHaveCount(20);
+    await expect(patents.locator(".tag", { hasText: "Pending" })).toHaveCount(2);
+    const first = items.first();
+    await expect(
+      first.getByRole("link", { name: /Rate update engine/ }),
+    ).toHaveAttribute("href", "https://patents.google.com/patent/US11979330B2/en");
+    await expect(first.getByText(/US11979330B2/)).toBeVisible();
+    await expect(first.getByText(/Google/)).toBeVisible();
   });
 
   test("popular topics lists all eight tags", async ({ page }) => {

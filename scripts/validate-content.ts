@@ -25,5 +25,5 @@ if (errors.length > 0) {
 console.log(
   `Content validation passed: ${input.authors.length} authors, ` +
     `${input.projects.length} projects, ${input.publications.length} publications, ` +
-    `${input.experience.length} experience items.`,
+    `${input.experience.length} experience items, ${input.patents.length} patents.`,
 );

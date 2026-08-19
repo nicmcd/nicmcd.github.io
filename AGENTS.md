@@ -52,6 +52,14 @@ handling.
 - `experience` (`src/content/experience.yaml`): `order` (explicit display
   order), `title`, `company`, `companyUrl`, `location`, `dateStart`,
   optional `dateEnd`, verbatim `description`.
+- `patents` (`src/content/patents.yaml`): `id`, `title`, `patentNumber`
+  (US publication number with kind code, e.g. `US10887217B2` granted or
+  `US20180316599A1` pending), `url` (Google Patents link), `date` (grant
+  date if granted, publication date if pending), `status` (`granted` or
+  `pending`), `assignee`. No images and no detail pages — entries render in
+  the homepage Patents section (date descending) and link externally. One
+  entry per invention: prefer the granted US patent over its application,
+  and never list foreign family members (EP/DE/WO/CN/HK) separately.
 
 Navigation, site metadata, contact email, CV path, social profiles, theme
 colors, and project filter definitions live in one typed module:
@@ -59,10 +67,11 @@ colors, and project filter definitions live in one typed module:
 
 Build-time validation (`src/utils/validate.ts`, run by `npm run validate` and
 by an Astro integration during `astro build`) checks cross-collection
-author/project/publication references, unique slugs, valid internal asset
-paths, valid dates, and required image alt text (non-empty and free of the
-redundant words "image", "photo", and "picture", matching the Astro dev
-toolbar audit rule `a11y-img-redundant-alt`).
+author/project/publication references, unique slugs (including patent ids
+and patent numbers), valid internal asset paths, valid dates, and required
+image alt text (non-empty and free of the redundant words "image", "photo",
+and "picture", matching the Astro dev toolbar audit rule
+`a11y-img-redundant-alt`).
 
 ## URL-stability rules
 
@@ -170,6 +179,25 @@ canonical steps are:
    `description`.
 2. Run `npm run validate && npm run check && npm test && npm run build`.
 
+### Add a patent
+
+The `.agents/skills/add-patent` skill encodes the detailed workflow; the
+canonical steps are:
+
+1. Look up the patent metadata (Google Patents XHR API, with
+   freepatentsonline.com and patents.justia.com as fallbacks) and confirm
+   title, `patentNumber`, `url`, `date`, `status`, and `assignee` with the
+   user. One entry per invention: prefer the granted US patent (`...B2`)
+   over its application (`...A1`); use the earliest grant when parent +
+   continuation grants exist; never list foreign family members.
+2. Append the entry to `src/content/patents.yaml` in date-ascending order
+   with a unique `id` (`us` + the number's digits, lowercase).
+3. Update the hardcoded content inventories in the tests: item counts and
+   Granted/Pending counts in `tests/e2e/homepage.spec.ts`,
+   `tests/e2e/patents.spec.ts`, and `tests/e2e/no-js.spec.ts`; document
+   counts in `tests/e2e/search.spec.ts` and `tests/e2e/routes.spec.ts`.
+4. Run `npm run validate && npm run check && npm test && npm run build`.
+
 ## Testing expectations
 
 - Keep `npm run validate`, `npm run check`, `npm test`, `npm run build`, and
@@ -180,9 +208,10 @@ canonical steps are:
   full run). The pre-commit hook uses the same cache, so a suite run right
   before committing makes the hook effectively instant.
 - E2e suite covers navigation, homepage sections, every project filter,
-  search, theme behavior, publication details and citation dialogs, all
-  canonical/redirect/feed routes, accessibility (axe: no serious or critical
-  violations), no-JavaScript rendering, and a link/asset crawl.
+  search, theme behavior, publication details and citation dialogs, the
+  patents section, all canonical/redirect/feed routes, accessibility (axe:
+  no serious or critical violations), no-JavaScript rendering, and a
+  link/asset crawl.
 - Reference screenshots (`tests/e2e/screenshots/`) are local, git-ignored
   artifacts regenerated with `npm run screenshots` (which sets
   `UPDATE_SCREENSHOTS=1`); regular e2e runs skip capture so they never

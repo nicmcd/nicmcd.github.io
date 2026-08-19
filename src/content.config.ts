@@ -108,4 +108,16 @@ const experience = defineCollection({
   }),
 });
 
-export const collections = { authors, projects, publications, experience };
+const patents = defineCollection({
+  loader: file("src/content/patents.yaml"),
+  schema: z.object({
+    title: z.string().min(1),
+    patentNumber: z.string().regex(/^US\d+[A-Z]\d$/),
+    url: z.url(),
+    date: z.coerce.date(),
+    status: z.enum(["granted", "pending"]),
+    assignee: z.string().min(1),
+  }),
+});
+
+export const collections = { authors, projects, publications, experience, patents };

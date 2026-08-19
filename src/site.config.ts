@@ -58,6 +58,7 @@ export const site = {
     { name: "Projects", url: "/#projects", sectionId: "projects", external: false },
     { name: "Publications", url: "/#publications", sectionId: "publications", external: false },
     { name: "Experience", url: "/#experience", sectionId: "experience", external: false },
+    { name: "Patents", url: "/#patents", sectionId: "patents", external: false },
     { name: "Contact", url: "/#contact", sectionId: "contact", external: false },
     { name: "CV", url: "/pubs/nicmcdonald_cv.pdf", external: false },
   ] satisfies NavItem[],

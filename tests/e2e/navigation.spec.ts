@@ -7,7 +7,7 @@ test.describe("navigation", () => {
     const nav = page.locator("#site-nav");
     await expect(nav).toBeVisible();
 
-    for (const name of ["Home", "Projects", "Publications", "Experience", "Contact", "CV"]) {
+    for (const name of ["Home", "Projects", "Publications", "Experience", "Patents", "Contact", "CV"]) {
       await expect(nav.getByRole("link", { name, exact: true })).toBeVisible();
     }
 

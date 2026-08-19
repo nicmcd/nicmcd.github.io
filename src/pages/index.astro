@@ -12,17 +12,19 @@ import {
   getAuthorsBySlug,
   getPrimaryAuthor,
   getExperienceSorted,
+  getPatentsSorted,
   aggregateTags,
 } from "../utils/content.ts";
-import { formatDateRange } from "../utils/dates.ts";
+import { formatDate, formatDateRange } from "../utils/dates.ts";
 
-const [projects, publications, authorsBySlug, admin, experience] =
+const [projects, publications, authorsBySlug, admin, experience, patents] =
   await Promise.all([
     getProjectsSorted(),
     getPublicationsSorted(),
     getAuthorsBySlug(),
     getPrimaryAuthor(),
     getExperienceSorted(),
+    getPatentsSorted(),
   ]);
 
 const tags = aggregateTags(projects, publications);
@@ -203,7 +205,39 @@ const profile = admin.data;
     </div>
   </section>
 
-  {/* 5. Popular topics */}
+  {/* 5. Patents */}
+  <section class="section" id="patents" aria-labelledby="patents-title">
+    <div class="container">
+      <h2 id="patents-title" class="section-title">Patents</h2>
+      <ul class="patent-list">
+        {
+          patents.map((patent) => (
+            <li class="patent-item">
+              <h3 class="patent-title">
+                <a
+                  href={patent.data.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={`${patent.data.title} (external link)`}
+                >
+                  {patent.data.title}
+                </a>
+              </h3>
+              <p class="patent-meta">
+                <span class="tag">
+                  {patent.data.status === "granted" ? "Granted" : "Pending"}
+                </span>
+                {patent.data.patentNumber} · {formatDate(patent.data.date)} ·{" "}
+                {patent.data.assignee}
+              </p>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+
+  {/* 6. Popular topics */}
   <section class="section" id="tags" aria-labelledby="tags-title">
     <div class="container">
       <h2 id="tags-title" class="section-title">Popular Topics</h2>
@@ -219,7 +253,7 @@ const profile = admin.data;
     </div>
   </section>
 
-  {/* 6. Contact */}
+  {/* 7. Contact */}
   <section class="section" id="contact" aria-labelledby="contact-title">
     <div class="container">
       <h2 id="contact-title" class="section-title">Contact</h2>

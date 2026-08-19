@@ -10,6 +10,7 @@ export type Project = CollectionEntry<"projects">;
 export type Publication = CollectionEntry<"publications">;
 export type Author = CollectionEntry<"authors">;
 export type Experience = CollectionEntry<"experience">;
+export type Patent = CollectionEntry<"patents">;
 
 /** Projects ordered by date descending (matches the legacy homepage). */
 export async function getProjectsSorted(): Promise<Project[]> {
@@ -41,6 +42,12 @@ export async function getPrimaryAuthor(): Promise<Author> {
 export async function getExperienceSorted(): Promise<Experience[]> {
   const items = await getCollection("experience");
   return items.sort((a, b) => a.data.order - b.data.order);
+}
+
+/** Patents ordered by date descending. */
+export async function getPatentsSorted(): Promise<Patent[]> {
+  const patents = await getCollection("patents");
+  return patents.sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
 }
 
 export interface TagInfo {

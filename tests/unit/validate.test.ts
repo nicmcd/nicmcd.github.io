@@ -44,6 +44,14 @@ function validInput(publicDir: string): ValidationInput {
         dateEnd: new Date("2021-01-01"),
       },
     ],
+    patents: [
+      {
+        id: "us1",
+        title: "Widget",
+        patentNumber: "US1234567B2",
+        date: new Date("2020-06-01"),
+      },
+    ],
     publicDir,
   };
 }
@@ -139,5 +147,35 @@ describe("content relationship validation", () => {
     expect(validateContent(input)).toContain(
       'experience "Job": end date precedes start date',
     );
+  });
+
+  it("rejects duplicate patent ids", () => {
+    const input = validInput(publicDir);
+    input.patents.push({
+      id: "us1",
+      title: "Other widget",
+      patentNumber: "US7654321B2",
+      date: new Date("2021-01-01"),
+    });
+    expect(validateContent(input)).toContain('patents: duplicate slug "us1"');
+  });
+
+  it("rejects duplicate patent numbers", () => {
+    const input = validInput(publicDir);
+    input.patents.push({
+      id: "us2",
+      title: "Other widget",
+      patentNumber: "US1234567B2",
+      date: new Date("2021-01-01"),
+    });
+    expect(validateContent(input)).toContain(
+      'patents: duplicate slug "US1234567B2"',
+    );
+  });
+
+  it("rejects invalid patent dates", () => {
+    const input = validInput(publicDir);
+    input.patents[0]!.date = new Date(Number.NaN);
+    expect(validateContent(input)).toContain('patent "Widget": invalid date');
   });
 });

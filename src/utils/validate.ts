@@ -46,11 +46,19 @@ export interface ValidationExperience {
   dateEnd: Date | undefined;
 }
 
+export interface ValidationPatent {
+  id: string;
+  title: string;
+  patentNumber: string;
+  date: Date;
+}
+
 export interface ValidationInput {
   authors: ValidationAuthor[];
   projects: ValidationProject[];
   publications: ValidationPublication[];
   experience: ValidationExperience[];
+  patents: ValidationPatent[];
   /** Directory that internal asset paths are resolved against (public/). */
   publicDir: string;
 }
@@ -76,6 +84,12 @@ export function validateContent(input: ValidationInput): string[] {
   checkUniqueSlugs("authors", input.authors.map((a) => a.slug), errors);
   checkUniqueSlugs("projects", input.projects.map((p) => p.slug), errors);
   checkUniqueSlugs("publications", input.publications.map((p) => p.slug), errors);
+  checkUniqueSlugs("patents", input.patents.map((p) => p.id), errors);
+  checkUniqueSlugs(
+    "patents",
+    input.patents.map((p) => p.patentNumber),
+    errors,
+  );
 
   const authorSlugs = new Set(input.authors.map((a) => a.slug));
   const projectSlugs = new Set(input.projects.map((p) => p.slug));
@@ -139,6 +153,12 @@ export function validateContent(input: ValidationInput): string[] {
   for (const item of input.experience) {
     if (item.dateEnd !== undefined && item.dateEnd < item.dateStart) {
       errors.push(`experience "${item.title}": end date precedes start date`);
+    }
+  }
+
+  for (const patent of input.patents) {
+    if (Number.isNaN(patent.date.getTime())) {
+      errors.push(`patent "${patent.title}": invalid date`);
     }
   }
 

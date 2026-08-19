@@ -70,13 +70,35 @@ test.describe("search dialog", () => {
     await expect(page.locator(".search-result-link")).toHaveCount(0);
   });
 
-  test("indexes exactly the profile, six projects, and seven publications", async ({ page }) => {
+  test("indexes exactly the profile, six projects, seven publications, and 22 patents", async ({ page }) => {
     const response = await page.request.get("/index.json");
     expect(response.ok()).toBe(true);
     const docs = await response.json();
-    expect(docs).toHaveLength(14);
+    expect(docs).toHaveLength(36);
     const kinds = docs.map((d: { kind: string }) => d.kind).sort();
     expect(kinds).toEqual([
+      "patent",
+      "patent",
+      "patent",
+      "patent",
+      "patent",
+      "patent",
+      "patent",
+      "patent",
+      "patent",
+      "patent",
+      "patent",
+      "patent",
+      "patent",
+      "patent",
+      "patent",
+      "patent",
+      "patent",
+      "patent",
+      "patent",
+      "patent",
+      "patent",
+      "patent",
       "profile",
       "project",
       "project",

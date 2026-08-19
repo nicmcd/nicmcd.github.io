@@ -129,11 +129,12 @@ test.describe("canonical routes", () => {
     });
   }
 
-  test("exactly six projects and seven publications exist", async ({ page }) => {
+  test("exactly six projects, seven publications, and 22 patents exist", async ({ page }) => {
     const response = await page.request.get("/index.json");
     const docs = await response.json();
     expect(docs.filter((d: { kind: string }) => d.kind === "project")).toHaveLength(6);
     expect(docs.filter((d: { kind: string }) => d.kind === "publication")).toHaveLength(7);
+    expect(docs.filter((d: { kind: string }) => d.kind === "patent")).toHaveLength(22);
   });
 });
 
