@@ -1028,6 +1028,12 @@ dialog::backdrop {
   margin: 0;
 }
 
+/* Dialog close buttons sit on the dialog surface, not the (always light)
+   navbar, so use the theme-aware text color instead of --color-navbar-text. */
+dialog .icon-button {
+  color: var(--color-text);
+}
+
 .search-input {
   width: 100%;
   font-family: var(--font-body);
