@@ -24,7 +24,13 @@ async function copyText(text: string): Promise<boolean> {
   textarea.select();
   let ok = false;
   try {
-    ok = document.execCommand("copy");
+    // `execCommand` is deprecated but remains the only copy path in
+    // legacy browsers without the Clipboard API; access it through a
+    // structural type so the deprecated DOM declaration is not used.
+    const legacy = document as unknown as {
+      execCommand(commandId: string): boolean;
+    };
+    ok = legacy.execCommand("copy");
   } catch {
     ok = false;
   }
