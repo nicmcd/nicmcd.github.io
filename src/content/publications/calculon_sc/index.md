@@ -22,5 +22,6 @@ imageAlt: Bar charts of batch time and HBM memory consumption for running GPT3 1
 projects:
   - calculon
 pdf: pubs/mikhailisaev_calculon_sc_2023.pdf
+slides: pubs/mikhailisaev_calculon_sc_2023_slides.pdf
 bibPath: publication/calculon_sc/cite.bib
 ---

@@ -170,6 +170,7 @@ test.describe("link and asset crawl", () => {
       "/pubs/jensdomke_hyperx_sc_2019.pdf",
       "/pubs/jensdomke_hyperx_sc_2019_slides.pdf",
       "/pubs/mikhailisaev_calculon_sc_2023.pdf",
+      "/pubs/mikhailisaev_calculon_sc_2023_slides.pdf",
       "/pubs/mikhailisaev_paragraph_icpp_2022.pdf",
       "/pubs/mikhailisaev_paragraph_icpp_2022_poster.pdf",
       "/pubs/mikhailisaev_scaling_2023.pdf",
