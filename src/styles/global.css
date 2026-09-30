@@ -85,8 +85,8 @@
   --color-muted: rgba(255, 255, 255, 0.54);
   --color-card-bg: #282a36;
   --color-card-border: #44475a;
-  --color-navbar-bg: #ffffff;
-  --color-navbar-text: #212529;
+  --color-navbar-bg: var(--color-bg);
+  --color-navbar-text: var(--color-text);
   --color-navbar-shadow: rgba(255, 255, 255, 0.11);
   --color-link: #f8f8f2;
   --color-link-hover: #5c87ff;
@@ -116,8 +116,8 @@
     --color-muted: rgba(255, 255, 255, 0.54);
     --color-card-bg: #282a36;
     --color-card-border: #44475a;
-    --color-navbar-bg: #ffffff;
-    --color-navbar-text: #212529;
+    --color-navbar-bg: var(--color-bg);
+    --color-navbar-text: var(--color-text);
     --color-navbar-shadow: rgba(255, 255, 255, 0.11);
     --color-link: #f8f8f2;
     --color-link-hover: #5c87ff;
@@ -299,7 +299,7 @@ mark {
 }
 
 /* ==========================================================================
-   Navigation — white fixed navigation in both themes.
+   Navigation — fixed navigation with theme-aware colors.
    ========================================================================== */
 
 .site-header {
@@ -329,7 +329,7 @@ mark {
 }
 
 .navbar-brand:hover {
-  color: var(--color-primary);
+  color: var(--color-primary-text);
 }
 
 .nav-toggle {
@@ -347,8 +347,8 @@ mark {
 }
 
 .nav-toggle:hover {
-  color: var(--color-primary);
-  border-color: var(--color-primary);
+  color: var(--color-primary-text);
+  border-color: var(--color-primary-text);
 }
 
 .site-nav {
@@ -383,11 +383,11 @@ mark {
 }
 
 .nav-link:hover {
-  color: var(--color-primary);
+  color: var(--color-primary-text);
 }
 
 .nav-link[aria-current="true"] {
-  color: var(--color-primary);
+  color: var(--color-primary-text);
   font-weight: 700;
 }
 
@@ -412,7 +412,7 @@ mark {
 }
 
 .icon-button:hover {
-  color: var(--color-primary);
+  color: var(--color-primary-text);
 }
 
 @media (min-width: 62rem) {
@@ -1028,8 +1028,7 @@ dialog::backdrop {
   margin: 0;
 }
 
-/* Dialog close buttons sit on the dialog surface, not the (always light)
-   navbar, so use the theme-aware text color instead of --color-navbar-text. */
+/* Dialog close buttons use the dialog surface text color. */
 dialog .icon-button {
   color: var(--color-text);
 }
