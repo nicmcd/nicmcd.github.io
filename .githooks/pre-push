@@ -1,0 +1,15 @@
+#!/bin/sh
+# Advisory only: audit failures must never block a push.
+# Enabled alongside pre-commit via `git config core.hooksPath .githooks`.
+
+if ! cd "$(git rev-parse --show-toplevel)"; then
+  echo "Warning: could not locate the repository; skipping npm audit." >&2
+  exit 0
+fi
+
+echo "Checking dependency advisories with npm audit (non-blocking)..." >&2
+if ! npm audit --fetch-retries=0 --fetch-timeout=10000; then
+  echo "Warning: npm audit reported vulnerabilities or could not complete. Review the output above; the push will continue." >&2
+fi
+
+exit 0

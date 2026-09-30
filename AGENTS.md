@@ -226,6 +226,10 @@ canonical steps are:
 
 ## Git hooks
 
+- A versioned pre-push hook lives in `.githooks/pre-push` and runs
+  `npm audit` as a non-blocking advisory check. Vulnerabilities, missing npm,
+  and network failures produce a warning but never block the push. Audit
+  requests use a 10-second timeout with no retries.
 - A versioned pre-commit hook lives in `.githooks/pre-commit` and runs the
   full test suite (`validate`, `check`, `test`, `build`, `test:e2e`) before
   every commit, mirroring CI. It runs through `scripts/test-cached.ts`, which
