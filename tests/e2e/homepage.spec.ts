@@ -31,7 +31,7 @@ test.describe("homepage", () => {
     await expect(about.getByRole("heading", { name: "Nic McDonald" })).toBeVisible();
     await expect(about.getByRole("heading", { name: "Biography" })).toBeVisible();
     await expect(
-      about.getByText(/senior research scientist at NVIDIA Research/),
+      about.getByText(/Senior Research Scientist at NVIDIA/),
     ).toBeVisible();
     await expect(about.getByRole("img")).toHaveAttribute(
       "alt",

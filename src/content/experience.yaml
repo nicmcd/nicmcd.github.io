@@ -6,7 +6,7 @@
   location: Salt Lake City, Utah
   dateStart: "2021-02-01"
   description: |-
-    At NVIDIA Research, I work on AI system architecture. I study how accelerator design, memory hierarchy, and interconnect shape the performance and efficiency of modern language-model workloads. I build models and simulation tools to explore hardware/software trade-offs, evaluate new inference system designs, and investigate architectures for agentic AI and small language models. My work sits at the intersection of computer architecture, networking, and machine learning systems, with a focus on turning research ideas into practical directions for future AI platforms.
+    I work on AI system architecture at NVIDIA Research, using analytical models to explore software and hardware tradeoffs for large language models (LLMs). I developed Calculon, a framework for rapidly estimating performance and resource usage across a broad range of execution configurations, and built tools for large-scale LLM training analysis, including studies of models with up to 128 trillion parameters. This work was published at SC23 and helped identify more efficient LLM optimization and system design strategies. My research also examines scale-up and scale-out interconnects and network topologies, including approaches that use optical circuit switches for efficient large-scale training. I have contributed to distributed GEMM research and software infrastructure by defining reusable multi-GPU APIs and helping integrate distributed algorithms into CUTLASS. I also develop AI accelerator design concepts that minimize energy use and data movement while maximizing inference speed across emerging model workloads.
 
 - id: google
   order: 2
@@ -17,7 +17,7 @@
   dateStart: "2019-01-01"
   dateEnd: "2021-01-29"
   description: |-
-    I worked in the system infrastructure team specifically on tightly-coupled high-performance network technologies covering topologies, routing algorithms, network acceleration and offloading, congestion control, processing architectures, and more.
+    At Google, I developed next-generation data center network topologies, routing algorithms, transport protocols, congestion control systems, and switching architectures. This work included guiding the architecture of future accelerated networking hardware and software systems. I also developed ParaGraph, an application-simulator interface and toolkit for hardware/software co-design that connected compiler-derived workload models with simulation infrastructure to support large-scale system exploration. ParaGraph was published at ICPP 2022.
 
 - id: hpe
   order: 3
@@ -28,7 +28,7 @@
   dateStart: "2016-01-01"
   dateEnd: "2018-12-31"
   description: |-
-    I was a lead architect on design of a new high-performance network designed for large-scale high-performance computing (HPC) systems and massively parallel memory-driven computing (MDC) systems. I was the key designer of the Gen-Z routing architectural specification. Using a data-driven simulation approach I guided the design of a novel multi-chip module (MCM) switch architecture that utilizes co-packaged integrated photonics.
+    At Hewlett Packard Labs, I was a lead architect for a new high-performance network supporting large-scale high-performance computing (HPC) and massively parallel memory-driven computing (MDC) systems. I was a key designer of the Gen-Z routing architecture specification. Using data-driven simulation, I also guided the design of a novel multi-chip module (MCM) switch architecture that used co-packaged integrated photonics.
 
 - id: l3
   order: 4
@@ -39,4 +39,4 @@
   dateStart: "2008-08-01"
   dateEnd: "2012-09-01"
   description: |-
-    Developed digital processing architectures for encryption, networking, and waveform data processing. Designed systems with strict requirements for high-performance, low-power, and low-area. All designs were meticulously scrutinized for high-reliability and signal integrity.
+    At L3 Communications, I developed digital processing architectures for encryption, networking, and waveform data processing. I designed systems to meet strict requirements for high performance, low power consumption, and a small hardware footprint. Each design underwent rigorous review for reliability and signal integrity.
